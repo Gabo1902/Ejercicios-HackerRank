@@ -1,4 +1,3 @@
-package EjerciciosHackerRank.CuartaPráctica;
 
 import java.util.Scanner;
 
