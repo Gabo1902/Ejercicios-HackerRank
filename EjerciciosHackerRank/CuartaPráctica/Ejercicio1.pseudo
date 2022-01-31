@@ -1,0 +1,61 @@
+[/**
+    Pseudcódigo de el ejercicio 1 de la cuarta práctica.
+    Se le hicieron correcciones al codigo java.
+**/
+procedure run() do 
+
+    crear input = nuevoEscaner();
+        
+    while haySiguienteLong() do 
+        crear pages = leerLong();
+        crear targetPage = leerLong();
+
+        //Imprime la cantidad mínima de páginas a pasar para llegar a la página deseada
+       printMinPageTurns(pages, targetPage);
+
+       cerrar(entrada);
+    end while 
+
+end procedure
+
+//Escriba los métodos aquí
+
+procedure printMinPageTurns(long pages, long targetPage) do 
+    
+    crear salida = 0;
+    crear hojasDesdeInicio = 0;
+    crear hojasDesdeFinal = 0;
+
+    if pages <= 0 || targetPage <= 0 || pages < targetPage do 
+        print "%d %d: invalid data%n", pages, targetPage;
+    else 
+
+        for i = 1; i <= targetPage; i++ do 
+
+            if (i % 2 != 0) && ((i+1) % 2 == 0)  do 
+                hojasDesdeInicio++;
+            else do
+                continue;
+            end if
+
+        end for 
+
+        for j = pages; j >= targetPage; j-- do 
+
+            if (j % 2 == 0) && ((j-1) % 2 != 0)  do 
+                hojasDesdeFinal--;
+            else do
+                continue;
+            end if
+
+        end for 
+
+        if hojasDesdeInicio <= (-1*hojasDesdeFinal) do 
+            salida = hojasDesdeInicio;
+        else do
+            salida = hojasDesdeFinal;
+        end if
+
+        print "%d %d: %d%n", pages, targetPage, salida;
+    end if
+end procedure

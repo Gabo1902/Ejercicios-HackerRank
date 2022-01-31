@@ -1,0 +1,36 @@
+procedure run() do 
+
+    while haySiguienteEntrada() do 
+
+        crear numero := leerLong();
+
+        if numero <= 0 do 
+            //No haga nada
+        else
+            pasosDelNumero := pasosCollatz(numero);
+
+            print "%d: %d", numero, pasosDelNumero;
+        end if
+    end
+end
+
+procedure pasosCollatz(numero) do 
+
+    crear contador := 0;
+    crear numeroAIterar := numero;
+
+    while numeroAIterar != 1 do 
+        
+        if numeroAIterar % 2 == 0 do 
+            numeroAIterar = numeroAIterar / 2;
+        else 
+            numeroAIterar = 3*numeroAIterar+1;
+        end if
+        
+        contador++;
+
+    end while
+
+    return contador
+
+end

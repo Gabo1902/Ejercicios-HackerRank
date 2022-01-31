@@ -1,0 +1,43 @@
+/*
+    No se necesitan arreglos para resolver los ejercicio de esta práctica.
+
+*/
+
+procedure run() do 
+    
+    crear montoBase = leerDouble();
+    total = 0;
+
+    while haySiguienteLinea() do
+        
+        crear suma = 0;
+
+        crear estadoCivil = leerDouble();
+        crear numHijos = leerDouble();
+        
+        //Calcula el monto de la ayuda respecto a las edades de los hijos
+        for i = 1; i<=numHijos; i++ do 
+            crear edad = leerDouble();
+            if edad >= 18 do
+                continue;
+            else if edad >= 6.0 && edad <= 12.0 do 
+                crear ayuda = suma + (montoBase/2^(i-1));
+                suma = ayuda*(1 + 0.5); //aplica regla 2
+            else
+                suma = suma + (montoBase/2^(i-1));
+            end if
+        end for
+        
+        //Aplica regla 3
+        if estadoCivil == 1 || estadoCivil == 5 do 
+            suma = suma*(1+0.25); //aumento del 25%
+        end if
+
+        total = total + suma;
+
+        print "%.2f", suma;
+    end while
+    print ; //linea en blanco
+
+    print ".2f", total;
+end procedure

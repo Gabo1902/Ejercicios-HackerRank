@@ -1,0 +1,24 @@
+        
+while ( this.input.hasNextLine() ) {
+            double entrada = this.input.nextDouble();
+            
+            System.out.printf( "       fixed: %f %n", entrada );
+            System.out.printf( " exponential: %e %n", entrada );
+            
+            System.out.println( this.input.nextLine() );
+            System.out.println();
+        }
+        
+while ( this.input.hasNextDouble() ) {
+            double entrada = this.input.nextDouble();
+            
+            System.out.printf( "       fixed: %f %n", entrada );
+            System.out.printf( " exponential: %e %n", entrada );
+            System.out.printf( "   preferred: %g %n", entrada );
+            System.out.println();
+        }
+        
+        
+        
+        
+        

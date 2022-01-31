@@ -1,0 +1,19 @@
+//No quedó como el código java, pero ayudó bastante a la resolución
+
+procedure run do 
+
+    crear precioCupon := leerDouble();
+
+    while haySiguienteDouble() do 
+
+        crear transaccion := leerDouble();
+
+        if transaccion > 10000000 || transaccion <= 0 do 
+            print "%8.2f err%n ", transaccion;
+        else
+            crear numCupones := parteEntera(transaccion/precioCupon);
+            print "%8.2f %d%n", transaccion, numCupones;
+        end if
+
+    end while 
+end

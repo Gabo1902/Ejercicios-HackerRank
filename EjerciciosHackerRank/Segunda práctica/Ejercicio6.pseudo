@@ -1,0 +1,20 @@
+procedure run do 
+
+    crear this.input := escanearEntrada();
+
+    while haySiguienteDouble() do 
+
+        crear precioSinReducir := leerDouble();
+
+        if precioSinReducir < 0 || precioSinReducir > 100000000 do 
+            print "%.2f: invalid data", precioSinReducir;
+        else
+            precioSinImpuesto := precioSinReducir / (1 + 0.13);
+            precioReducido := precioSinImpuesto * (1 + 0.115);
+            diferencia := precioSinReducir - precioReducido;
+            
+            print "%.2f: %.2f (%.2f)", precioSinReducir, precioReducido, diferencia;
+        end if 
+    end while
+
+end

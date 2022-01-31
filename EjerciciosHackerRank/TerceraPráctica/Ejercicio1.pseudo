@@ -1,0 +1,27 @@
+procedure run do 
+    crear sizeEscalera = leerInt();
+    crear strSizeEscalera = convertirAString(sizeEscalera);
+
+    if sizeEscalera <= 0 do 
+        //no haga nada
+    else 
+        for i = 1, i <= sizeEscalera, i++ do 
+            
+            //Agrega los numerales de cada reglón
+            for j = 1, j <= i, j++ do 
+
+                print "%"+strSizeEscalera+"c", 35;
+
+                if j<i do 
+                    continue;
+                else
+                    print "%"+strSizeEscalera+"s", reglon;
+                end if
+            end for 
+            
+            //Por defecto, los reglones se justifican hacia la derecha, como se quiere
+            print; //System.out.println()
+
+        end for
+    end if
+end

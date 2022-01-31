@@ -1,0 +1,63 @@
+package EjerciciosHackerRank.TerceraPráctica;
+
+import java.util.Scanner;
+import java.lang.Character;
+
+/**
+* Encrypts or decrypts texts using the Caesar algorithm
+**/
+public class Solution
+{
+   /**
+    * Gets data from standard input
+    */
+   private Scanner input = null;
+
+   /**
+    * Start the execution of the solution
+    * @param args Command line arguments
+    */
+   public static void main(String[] args)
+   {
+       Solution solution = new Solution();
+       solution.run();
+   }
+
+
+    /**
+    * Run the solution. This method is called from main()
+    */
+   public void run()
+   {
+       // Create object to read data from standard input
+       this.input = new Scanner(System.in);
+
+       // This code replicates the input to the standard output
+       // Modify this code to solve the problem
+       while ( this.input.hasNextLine() )
+       {
+            String linea = this.input.nextLine();
+            String minus = "abcdefghijklmnopqrstuvwxyz";
+            String mayus = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            for (int i = 0; i < minus.length(); i++) {
+                for (int j = 0; j < minus.length(); j++) {
+                    
+                    if ( linea.charAt(i) == minus.charAt(j) || linea.charAt(i) == mayus.charAt(j) ) {
+                        //do something
+                    } else {
+                        continue;
+                    }
+                }
+            }
+
+
+
+           System.out.println( this.input.nextLine() );
+       }
+
+       // Close the standard input
+       this.input.close();
+   }
+
+}

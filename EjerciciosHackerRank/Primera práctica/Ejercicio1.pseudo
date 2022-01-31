@@ -1,0 +1,26 @@
+procedure run do 
+
+    crear ancho := leerInt()
+    crear hayCeroALaIzq := leerInt()
+    crear contador = 1
+
+    if hayCeroALaIzq == 0 do 
+
+        while haySiguienteLinea() do 
+
+            crear entrada := leerlinea()
+            print "%0*d %s %n", ancho, contador, entrada
+            contador++
+        end
+
+    else if hayCeroALaIzq == -1 do 
+
+        while haySiguienteLinea() do 
+            crear entrada := leerlinea()
+            print "%*d %s %n", ancho, contador, entrada
+            contador++
+        end
+
+    end if
+
+end

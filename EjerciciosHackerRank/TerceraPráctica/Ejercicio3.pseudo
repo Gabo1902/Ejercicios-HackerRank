@@ -1,0 +1,61 @@
+procedure run() do 
+
+    crear ganaJug1 = 0.0;
+    crear ganaJug2 = 0.0;
+    crear empates = 0.0;
+    double intentos = 0.0;
+
+    while haySiguienteEntrada() do 
+        
+        crear jug1 = "";
+        crear jug2 = "";
+        
+        if siguienteEntrada("[^RPS]")) do
+            jug1 = leerString();
+            print "invalid shape: %s", jug1;
+            continue;
+        else 
+            jug1 = leerString();
+        end if
+
+        if siguienteEntrada("[^RPS]")) do 
+            jug2 = leerString();
+            print "invalid shape: %s", jug2;
+            continue;
+        else 
+            jug2 = leerString();
+        end if
+
+        if jug1 = jug2 do 
+            empates++;
+        else if (jug1.equals("P") && jug2.equals("R")) || (jug1.equals("R") && jug2.equals("S")) || (jug1.equals("S") && jug2.equals("P")) do 
+            ganaJug1++;
+        else 
+            ganaJug2++;
+        end if
+    end while
+
+    intentos++
+
+    //calcula los porcentajes 
+    crear empatesPorcentaje = (empates/intentos)*100;
+    crear ganaJug1Porcentaje = (ganaJug1/intentos)*100;
+    crear ganaJug2Porcentaje = (ganaJug2/intentos)*100;
+    crear totalPorcentaje =  empatesPorcentaje+ganaJug1Porcentaje+ganaJug2Porcentaje;
+
+    //imprime los resultados
+    print "%8s %3.0f %3.0f%%%n", "Player1:", ganaJug1, ganaJug1Porcentaje;
+    print "%8s %3.0f %3.0f%%%n", "Player2:", ganaJug2, ganaJug2Porcentaje;
+    print "%8s %3.0f %3.0f%%%n", "Draws:", empates, empatesPorcentaje;
+    print "%8s %3.0f %3.0f%%%n", "Total:", intentos, totalPorcentaje;
+    print ; //línea en blanco
+
+    if ganaJug1==ganaJug2 do 
+        print "%8s", "Draw!";
+    else if ganaJug1>ganaJug2 do 
+        print "%8s Player1", " Winner:";
+    else
+        print "%8s Player2", " Winner:";
+    end if
+
+end procedure

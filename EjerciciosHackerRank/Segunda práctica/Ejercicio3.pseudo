@@ -1,0 +1,47 @@
+//Aprueba los 25/25 casos
+
+procedure run do 
+    
+    if entradaEsLong() do 
+        crearLong numJugadores := leerLong();
+        if entradaEsLong() do
+            crearLong jugadorInicial := leerLong(); 
+            if entradaEsLong() do 
+                crearLong segundos := leerLong();
+
+                if numJugadores<1 || jugadorInicial<1 || segundos<1 || jugadorInicial > numJugadores do 
+
+                print "invalid data";
+
+                else 
+                    crearLong traslado := jugadorInicial + segundos - 1;
+                    crearLong ultimoPase := traslado % numJugadores;
+                    crearLong jugadorFinal :=0;
+                    
+                    if ultimoPase = 0 do 
+                        jugadorFinal = numJugadores;
+                    else 
+                        jugadorFinal = ultimoPase;
+                    end if 
+
+                    print jugadorFinal;
+
+                end if //fin if else del juego
+
+            else
+                print "invalid data";
+            end if 
+        else   
+            print "invalid data";
+        end if
+    else 
+        print "invalid data";
+    end if //fin de if else de validación de entrada
+
+end
+
+/*
+
+if esLong(numJugadores) = false || esLong(jugadorInicial) = false || esLong(segundos) = false || numJugadores<1 || jugadorInicial<1 || segundos<1 || jugadorFinal > numJugadores do 
+
+*/

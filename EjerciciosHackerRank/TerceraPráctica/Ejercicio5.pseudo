@@ -1,0 +1,65 @@
+//A medio palo. Terminar antes de que se acabe el tiempo.
+
+
+/**
+    Método que hace toda la logística del programa. Valida la llave y la instrucción y lleva a cabo la transformación de los caracteres por medio del sistema ASCII.
+**/
+procedure run() do 
+    
+    crear input = newScanner();
+
+    crear key = leerLong();
+    crear instruction = leerInt();
+    crear salida = '';
+
+    while haySiguienteLinea() do
+
+        if key < 0 do
+            print "invalid key"; //valida la llave
+            break;
+        else if instruction != 0 && instruction != 1 do
+            print "invalid instruction"; //valida la instrucción
+            break;
+        else
+            crear entrada = leerLinea();
+
+            for i = 0 ; i < entrada.length(), i++ do 
+                crear caracter = entrada.charAt(i); // lea cada caracter
+                salida = transformar(char caracter, int instruction, long key);
+                print salida;
+            end for
+        end if
+    end while
+end procedure
+
+/**
+    Me encripta o desencripta el caracter dependiendo de la instrucción y la llave.
+    Retorna el caracter transformado.
+**/
+procedure transformar(char caracter, int instruction, long key) do 
+    
+    crear codeAscii = castear(caracter, int);
+    crear position = 0;
+    crear newPosition = 0;
+    crear newCodeAscii = 0;
+    crear caracterTransformado = '';
+
+    if( esAlfabetico(codeAscii) ) do 
+        if esMayuscula(caracter) == true do 
+            position = (codeAscii % 65) + 1; //aqui aplicamos f
+            newPosition = ( position + elevar(-1, instruction+1)*key ) % 26; //Aqui convertimos
+            newCodeAscii = position + 64; //aqui aplicamos g
+            caracterTransformado = castear(newCodeAscii, char);
+        else do 
+            position = (codeAscii % 97) + 1; //aqui aplicamos f'
+            newPosition = ( position + elevar(-1, instruction+1)*key ) % 26; //Aqui convertimos
+            newCodeAscii = position + 96; //aqui aplicamos g'
+            caracterTransformado = castear(newCodeAscii, char);
+        end if
+
+        return caracterTransformado;
+    else 
+        caracterTransformado = caracter;
+        return caracterTransformado;
+    end if 
+end procedure

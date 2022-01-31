@@ -1,0 +1,40 @@
+//Diseño del ejercicio 2
+procedure run do 
+
+    crear escaner := leer(entrada);
+    delimitar(escaner, "[:\\s]+");
+
+    while haySiguienteLinea(); do 
+
+        crearLong horas := leerLong();
+        crearLong minutos := leerLong();
+        crearLong segundos := leerLong();
+
+        //ya este cálculo está seguro
+        segundosConvertidos := segundos % 60;
+        minutosNoConvertidos := minutos + parteEntera(segundos/60) 
+        minutosConvertidos := minutosNoConvertidos % 60
+        horasConvertidas := horas + parteEntera(minutosNoConvertidos/60);
+
+        //En el caso de las horas, lo que hace el %02d es que establece un MÍNIMO de 2 espacios, si hay más de 2 caracteres, no los restringe
+        print "%02d:%02d:%02d%n", horasConvertidas, minutosConvertidos, segundosConvertidos;
+
+    end while 
+
+end
+
+/*
+
+//Me sirvió, pero había una manera mucho más sencilla de hacerlo
+
+crearString strHorasConvertidas = convertirAString(horasConvertidas);
+        crearLong anchoDeHoras = tamano(strHorasConvertidas);
+        if horasConvertidas > 9 do 
+            crearString formatoDeHoras = "%" + anchoDeHoras + "d";    
+            print formatoDeHoras + ":%02d:%02d%n", horasConvertidas, minutosConvertidos, segundosConvertidos;
+        else 
+            crearString formatoDeHoras = "%" + anchoDeHoras + "d";
+            print formatoDeHoras + ":%02d:%02d%n", horasConvertidas, minutosConvertidos, segundosConvertidos;
+        end if
+        
+*/

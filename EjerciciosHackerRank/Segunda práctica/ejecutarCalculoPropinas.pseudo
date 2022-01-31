@@ -1,0 +1,76 @@
+procedure ejecutarCalculoPropinas do
+    crear impuesto := leerNumero()
+    crear tipoDeCambio := leerNumero()
+
+    //crear strPrecioIndividualConImpuesto := ""
+    crear strPrecioTotal := ""
+    crear strPropinas := ""
+    crear strPrecioTotalConPropina := ""
+
+    crear costoTotalSinImpuesto := 0
+    crear costoTotalConImpuesto := 0
+    crear costoTotalMonedaExtranjera := 0
+
+    //Suma los costos con impuestos y los costos sin impuestos
+    while haySiguienteLinea() do
+
+        crear strCostoItem = leerLinea()
+            crear costoItem
+            crear costoItemConImpuesto
+            crear costoItemMonedaExtranjera //El costo del item con impuestos (si aplican), en la moneda extranjera
+
+            //Calcula los impuestos si estos aplican
+            if primeraPos(strCostoItem) == '+' do 
+
+                //Convierte el costo de un string a un numero
+                costoItem := convertirANumero(strCostoItem) 
+                
+                //Le mete el impuesto al costo del item 
+                costoItemConImpuesto := calcularImpuesto
+
+                //Convierte el costo con impuesto a la moneda extranjera
+                costoItemMonedaExtranjera := convertir(costoItemConImpuesto)
+
+            else if primerPos(strCostItem) == '-' do
+                costoItem = convertirANumero(strCostoItem)
+                costoItemConImpuesto = costoItem
+                costoItemMonedaExtranjera := convertir(costoItem)
+
+            end if
+        
+        //Calcula los costos totales
+        costoTotalSinImpuesto := costoTotalSinImpuesto + costoItem
+        costoTotalConImpuesto := costoTotalConImpuesto + costoItemConImpuesto
+        costoTotalMonedaExtranjera := costoTotalMonedaExtranjera + costoItemMonedaExtranjera
+        
+        print "%12.2f %12.2f", costoItemConImpuesto, costoItemMonedaExtranjera
+    end while
+    
+    //Imprime los resultados totales usando formato
+    print "------------ -------------"
+    print "%12.2f %12.2f", costoTotal, costoTotalMonedaExtranjera
+    print "------------ -------------"      
+
+    //Trata las propinas
+    for index :=1 hasta index :=4 do 
+        //Multiplica el costo total sin impuesto por 5%, 10%, 15%, 20%
+        crear propina := (costoTotalSinImpuesto)(index * 0.05)
+        crear propinaMonedaExtranjera := convertir(propina)
+        crear porcentaje := index * 5
+
+        //Imprime la propina, la propina en la moneda extranjera y el porcentaje con formato
+        print "%12.2f %12.2f %2d%", propina, propinaMonedaLocal, porcentaje
+
+    end for
+
+    print "============ ============"
+    
+    for index :=1 hasta index == 4
+        crear totalConPropina := costoTotalConImpuesto + (costoTotalSinImpuesto)(index*0.05)
+        crear totalConPropinaMonedaLocal := convertir(totalConPropina)
+
+        //Imprime los precios con propina y los porcentajes con formato
+        print "%12.2f %12.2f %2d%", totalConPropina, totalConPropinaMonedaLocal, porcentaje 
+    end for
+
+end procedure

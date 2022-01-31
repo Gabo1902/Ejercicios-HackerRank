@@ -1,0 +1,28 @@
+procedure main do 
+
+    crear entrada = leerEntrada();
+
+    while haySiguienteEntrada() do
+
+        nota := leerDouble();
+        notaFinal := redondear(nota/(10*0.5))*0.5;
+        condicion := "";
+        formato := "%5.1f";
+
+        if notaFinal < 0 || notaFinal >10 do 
+            condicion = "ERR";
+            notaFinal = nota;
+            formato = "2.2";
+        else if notaFinal < 6.0 do 
+            condicion = "PE";
+        else if notaFinal < 7.0 do 
+            condicion = "AMP";
+        else 
+            condicion = "AP";
+        end if
+
+        print formato + " %s %n", notaFinal, condicion;
+
+    end
+
+end
