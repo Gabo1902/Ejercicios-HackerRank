@@ -1,19 +1,28 @@
 import java.util.Scanner;
 
-import javax.swing.plaf.basic.BasicToolBarSeparatorUI;
-
 public class PbaMatrices {
+
     private Scanner input = null;
     public static void main(String[] args) {
-        PbaMatrices prueba = new PruebaMatrices();
+        PbaMatrices prueba = new PbaMatrices();
         prueba.run();
     }
 
     public void run() {
-        
+
+        Scanner entrada = new Scanner(System.in);
+
+        String cadena = entrada.nextLine();
+
+        char[] arreglo = new char[3];
+        for (int i = 0; i < arreglo.length; i++) {
+            arreglo[i] = cadena.charAt(i);
+        }
+        char[] filaDeX = {'X','X','X'};
+
+        boolen sonIguales = (filaDeX == arreglo); //Problemático
+        System.out.println(arreglo);
+
+        entrada.close();
     }
-
-
-
-
 }
