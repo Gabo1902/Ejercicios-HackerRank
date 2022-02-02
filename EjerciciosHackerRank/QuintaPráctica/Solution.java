@@ -51,24 +51,21 @@ public class Solution
     }
 
     /**
-     * Calcula el factorial de un número.
+     * Calcula de forma iterativa el coeficiente binomial de n en k, mediante la equivalencia
+     * n!/(k!*(n-k)!) = (n*(n-1)***(n-k))/k!.
      * 
-     * @param natural Un entero mayor o igual a 0
-     * @return factorial Producto de todos los enteros positivos hasta
-     *         el número
+     * @param n Número natural
+     * @param k Natural menor o igual a n
+     * @return coeficiente El coeficiente binomial
      */
-    public long factorial (int natural) {
-        if (natural == 0) {
-            return 1;
-        } else {
-            long j = 1;
-            long factorial = 1;
-            while (j <= natural) {
-                factorial *= j;
-                j++;
-            }
-            return factorial;
+    public long coeficienteBinomial(int n, int k) {
+
+        long coeficiente = 1;
+        for (int i = 0; i <= (k-1); i++) {
+            coeficiente *= (n-i);
+            coeficiente /= (i+1);
         }
+        return coeficiente;
     }
 
     /**
@@ -83,7 +80,7 @@ public class Solution
     public long[] filaPascal(int n) {
         long[] filaPascal = new long[n+1];
         for (int j = 0; j <= n; j++) {
-            filaPascal[j] = factorial(n)/(factorial(j)*factorial(n-j));
+            filaPascal[j] = coeficienteBinomial(n, j);
         }
         return filaPascal;
     }
