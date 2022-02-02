@@ -37,11 +37,11 @@ public class Solution
             if (grado < 0) {
                 System.out.printf("%d: invalid data", grado);
             } else {
-                grado = n;
+                int n = grado;
 
                 System.out.printf("%d: ", n);
                 //Ciclo que imprime polinomio
-                for (int i = 0; i < n; i++) {
+                for (int i = 0; i <= n; i++) {
                     imprimirTermino(i, n);
                 }
             }
@@ -113,7 +113,8 @@ public class Solution
             if (n == 1) {
                 System.out.println(" - b");
             } else {
-                System.out.printf(" - b^%d%n", n);
+                String signo = (i%2==0)?"+":"-";
+                System.out.printf(" %s b^%d%n", signo, n);
             }
         } else {
             String signo = (i%2==0)?"+":"-";
