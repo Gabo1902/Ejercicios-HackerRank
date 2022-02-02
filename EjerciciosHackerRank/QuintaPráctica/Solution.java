@@ -30,12 +30,12 @@ public class Solution
 
 		// This code replicates the input to the standard output
 		// Modify this code to solve the problem
-		while ( this.input.hasNextLine() )
+		while ( this.input.hasNexInt() )
 		{
 			int grado = this.input.nextInt();
 
             if (grado < 0) {
-                System.out.printf("%d: invalid data", grado);
+                System.out.printf("%d: invalid data%n", grado);
             } else {
                 int n = grado;
 
