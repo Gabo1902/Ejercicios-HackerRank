@@ -40,7 +40,7 @@ public class Solution
                 grado = n;
 
                 System.out.printf("%d: ", n);
-                //Imprime polinomio
+                //Ciclo que imprime polinomio
                 for (int i = 0; i < n; i++) {
                     imprimirTermino(i, n);
                 }
@@ -50,6 +50,13 @@ public class Solution
 		this.input.close();
 	}
 
+    /**
+     * Calcula el factorial de un número.
+     * 
+     * @param natural Un entero mayor o igual a 0
+     * @return factorial Producto de todos los enteros positivos hasta
+     *         el número
+     */
     public int factorial (int natural) {
         if (natural == 0) {
             return 1;
@@ -64,6 +71,15 @@ public class Solution
         }
     }
 
+    /**
+     * Crea un arreglo con cada uno de los coeficientes de la 
+     * expasión de (a+b)^n. Es lo mismo que crear la n-ésima fila de 
+     * arriba a abajo, del triángulo de Pascal.
+     * 
+     * @param n Un número natural
+     * @return filaPascal Un arreglo con los términos de la n-ésima 
+     *         fila del triángulo de Pascal
+     */
     public int[] filaPascal(int n) {
         int[] filaPascal = new int[n+1];
         for (int j = 0; j <= n; j++) {
@@ -72,6 +88,14 @@ public class Solution
         return filaPascal;
     }
 
+    /**
+     * Método que imprime el i-ésimo término de una expansión binomial
+     * (a+b)^n. Cumple con las convenciones matemáticas de notación.
+     * 
+     * @param i Indexa el término correspondiente en la expansión bi-
+     *          nomial
+     * @param n Grado de la expansión binomial
+     */
     public void imprimirTermino(int i, int n) {
         
         int[] coefVector = filaPascal(n);
