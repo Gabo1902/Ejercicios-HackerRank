@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * Automatic judge that calculates the result of a tic tac toe game
  */
-public class Solution
+public class Solution4
 {
 	/**
 	 * Gets data from standard input
@@ -16,7 +16,7 @@ public class Solution
 	 */
 	public static void main(String[] args)
 	{
-		Solution solution = new Solution();
+		Solution4 solution = new Solution4();
 		solution.run();
 	}
 
