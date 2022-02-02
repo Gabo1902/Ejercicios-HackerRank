@@ -21,18 +21,18 @@ public class Solution
 	}
 
 	/**
-	 * Run the solution. This method is called from main()
-	 */
-	public void run()
-	{
-		// Create object to read data from standard input
-		this.input = new Scanner(System.in);
+     * Run the solution. This method is called from main()
+     */
+    public void run()
+    {
+        // Create object to read data from standard input
+        this.input = new Scanner(System.in);
 
-		// This code replicates the input to the standard output
-		// Modify this code to solve the problem
-		while ( this.input.hasNexInt() )
-		{
-			int grado = this.input.nextInt();
+        // This code replicates the input to the standard output
+        // Modify this code to solve the problem
+        while ( this.input.hasNextLong() ) //Long long
+        {
+            int grado = this.input.nextInt();
 
             if (grado < 0) {
                 System.out.printf("%d: invalid data%n", grado);
@@ -45,10 +45,10 @@ public class Solution
                     imprimirTermino(i, n);
                 }
             }
-		}
-		// Close the standard input
-		this.input.close();
-	}
+        }
+        // Close the standard input
+        this.input.close();
+    }
 
     /**
      * Calcula el factorial de un número.
@@ -57,12 +57,12 @@ public class Solution
      * @return factorial Producto de todos los enteros positivos hasta
      *         el número
      */
-    public int factorial (int natural) {
+    public long factorial (int natural) {
         if (natural == 0) {
             return 1;
         } else {
-            int j = 1;
-            int factorial = 1;
+            long j = 1;
+            long factorial = 1;
             while (j <= natural) {
                 factorial *= j;
                 j++;
@@ -80,8 +80,8 @@ public class Solution
      * @return filaPascal Un arreglo con los términos de la n-ésima 
      *         fila del triángulo de Pascal
      */
-    public int[] filaPascal(int n) {
-        int[] filaPascal = new int[n+1];
+    public long[] filaPascal(int n) {
+        long[] filaPascal = new long[n+1];
         for (int j = 0; j <= n; j++) {
             filaPascal[j] = factorial(n)/(factorial(j)*factorial(n-j));
         }
@@ -98,8 +98,8 @@ public class Solution
      */
     public void imprimirTermino(int i, int n) {
         
-        int[] coefVector = filaPascal(n);
-        int coeficiente = coefVector[i];
+        long[] coefVector = filaPascal(n);
+        long coeficiente = coefVector[i];
 
         if (i == 0) {
             if (n == 0) {
