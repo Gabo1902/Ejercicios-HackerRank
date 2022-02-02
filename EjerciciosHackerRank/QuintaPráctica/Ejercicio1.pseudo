@@ -36,22 +36,22 @@ procedure factorial(natural) do
 end procedure
 
 procedure filaPascal(n) do
-    crear arreglo[] = crearArreglo(n+1);
+    crear arreglo = crearArreglo(n+1);
     for i = 0; i <= n; i++ do
         arreglo[i] = factorial(n)/(factorial(i)*factorial(n-i));
     end for
-    return arreglo[];
+    return arreglo;
 end procedure
 
 procedure imprimirTermino(i,n) do 
     
-    crear coefVector[n+1] := filaPascal[n]; //int[n+1]
+    crear coefVector := filaPascal[n]; //int[n+1]
     crear coeficiente : = coefVector[i];
 
     if i == 0 do 
 
         if n == 0 do
-            print "1";
+            print "1%n";
         else if n == 1 do 
             print "a";
         else do 
@@ -61,7 +61,7 @@ procedure imprimirTermino(i,n) do
     else if i == n do
 
         if n == 1 do 
-            print " - b";
+            print " - b%n";
         else do
             print " - b^%d%n", n;
         end if
@@ -71,9 +71,9 @@ procedure imprimirTermino(i,n) do
 
         if (n-i)==1 && i==1 do 
             print " %s %dab", signo, coeficiente;
-        else if (n-i)==1 do
+        else if (n-i) == 1 do
             print " %s %dab^%d", signo, coeficiente, i;
-        else if i==i do
+        else if i == 1 do
             print " %s %da^%db", signo, coeficiente, n-i;
         else do
             print " %s %da^%db^%d", signo, coeficiente, n-i, i;
