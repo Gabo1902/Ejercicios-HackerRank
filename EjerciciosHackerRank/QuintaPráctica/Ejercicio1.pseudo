@@ -1,0 +1,77 @@
+procedure run() do 
+    
+    crear escaner := leer(del sistema);
+
+    while haySiguienteLinea() do
+
+        crear grado := leerInt();
+
+        if grado < 0 do 
+            print "%d: invalid data", grado;
+        else do
+
+            grado = n;
+            
+            //Aquí se va a imprimir el polinomio.
+
+        end if
+    end while
+end procedure;
+
+procedure factorial(natural) do 
+    if natural == 0 do 
+        return 1;
+    else 
+        crear i = 1;
+        crear factorial = 1;
+        while i <= natural do 
+            factorial *= i;
+            i++;
+        end while
+        return factorial;
+    end if
+end procedure
+
+procedure filaPascal(n) do
+    crear arreglo[] = crearArreglo(n+1);
+    for i = 0; i <= n; i++ do
+        arreglo[i] = factorial(n)/(factorial(i)*factorial(n-i));
+    end for
+    return arreglo[];
+end procedure
+
+procedure imprimirTermino(n,i) do 
+    
+    crear coefVector[n+1] := filaPascal[n]; //int[n+1]
+    crear coeficiente : = coefVector[i];
+
+    if i == 0 do 
+
+        if n == 1 do 
+            print "a";
+        else do 
+            print "a^%d", n;
+        end if
+
+    else if i == n do
+
+        if n == 1 do 
+            print " - b";
+        else do
+            print " - b^%d%n", n;
+        end if
+
+    else
+        crear signo = (i%2==0)?"+":"-";
+
+        if (n-i)==1 && i==1 do 
+            print " %s %dab", signo, coeficiente;
+        else if (n-i)==1 do
+            print " %s %dab^%d", signo, coeficiente, i;
+        else if i==i do
+            print " %s %da^%db", signo, coeficiente, n-i;
+        else do
+            print " %s %da^%db^%d", signo, coeficiente, n-i, i;
+        end if
+    end if
+end procedure
