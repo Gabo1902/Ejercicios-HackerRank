@@ -20,8 +20,8 @@ public class PbaMatrices {
         }
         char[] filaDeX = {'X','X','X'};
 
-        boolen sonIguales = (filaDeX == arreglo); //Problemático
-        System.out.println(arreglo);
+        boolean sonIguales = (filaDeX == arreglo); //Problemático
+        System.out.println(sonIguales);
 
         entrada.close();
     }
