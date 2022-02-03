@@ -79,40 +79,50 @@ public class Solution
 	}
 
 	/**
-	 * Método que imprime el histrograma requerido, a partir de los datos preliminares obtenidos y utilizando los métodos anteriores.
-	 * 
-	 * @param values Arreglo donde se encuentran cada uno de los valores recopilados
-	 * @param classes Número de intervalos a desplegar
-	 * @param integerDigits Cantidad de dígitos enteros que van a poseer los extremos de cada intervalo
-	 * @param decimalDigits Cantidad de dígitos decimales que van a poseer los extremos de cada intervalo
-	 */
-	public void printHistogram(double[] values, int classes, int integerDigits, int decimalDigits) {
-		
-		double min, max;
+     * Método que imprime el histrograma requerido, a partir de los datos preliminares obtenidos y utilizando los métodos anteriores.
+     * 
+     * @param values Arreglo donde se encuentran cada uno de los valores recopilados
+     * @param classes Número de intervalos a desplegar
+     * @param integerDigits Cantidad de dígitos enteros que van a poseer los extremos de cada intervalo
+     * @param decimalDigits Cantidad de dígitos decimales que van a poseer los extremos de cada intervalo
+     */
+    public void printHistogram(double[] values, int classes, int integerDigits, int decimalDigits) {
+        
+        double min, max;
 
-		min = max = values[0];
-		for (int i = 0; i < values.length; i++) {
-			if (values[i]<min) min = values[i];
-			if (values[i]>max) max = values[i];
-		}
+        min = max = values[0];
+        for (int i = 0; i < values.length; i++) {
+            if (values[i]<min) min = values[i];
+            if (values[i]>max) max = values[i];
+        }
 
-		double incrementoW = (max - min) / classes;
-		double minIntervalo = min;
-
-		//Aquí va lo bonito
-		String formatoNumerico = toString(integerDigits)+"."+toString(decimalDigits);
-		for (int i = 1; i <= classes; i++) {
-			if (i == classes) {
-				System.out.printf("[%"+formatoNumerico+"f, %"+formatoNumerico+"f ] | ", (i-1)*incrementoW, i*incrementoW);
-			} else {
-				System.out.printf("[%"+formatoNumerico+"f, %"+formatoNumerico+"f [ | ", (i-1)*incrementoW, i*incrementoW);
-			}
-			for (int j = 0; j < values.length; j++) {
-				if (encontrarClase(values[j], min, incrementoW) == i ) {
-					System.out.print("*");
-				}
-			}
-			System.out.println();
-		}
-	}
+        double incrementoW = (max - min) / classes;
+        
+        //Aquí va lo bonito
+        String formatoNumerico = String.valueOf(integerDigits)+"."+String.valueOf(decimalDigits);
+        
+        for (int i = 1; i <= classes; i++) {
+            if (i == classes) {
+                System.out.printf("[%"+formatoNumerico+"f, %"+formatoNumerico+"f] | ", min + (i-1)*incrementoW, min + i*incrementoW);
+            } else {
+                System.out.printf("[%"+formatoNumerico+"f, %"+formatoNumerico+"f[ | ", min + (i-1)*incrementoW, min + i*incrementoW);
+            }
+            
+            // Pone los asteriscos
+            for (int j = 0; j < values.length; j++) {
+                
+                int intervaloDePertenencia = 0;
+                
+                if (encontrarClase(values[j], min, incrementoW) == classes) {
+                    intervaloDePertenencia = encontrarClase(values[j], min, incrementoW) - 1;
+                } else {
+                    intervaloDePertenencia = encontrarClase(values[j], min, incrementoW);
+                }
+                if (intervaloDePertenencia == i-1 ) {
+                    System.out.print("*");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
