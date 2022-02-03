@@ -53,7 +53,11 @@ public class Solution
 
     // Implement missing and required methods here
 
-	// Read the values and store them into the array
+	/**
+	 * Lee los valores y los almacena dentro del arreglo.
+	 * 
+	 * @param arreglo Lugar donde se van a almacenar los valores obtenidos de la entrada.
+	 */
 	public void readValues(double arreglo[]) {
 		for (int i = 0; i < arreglo.length; i++) {
 			arreglo[i] = this.input.nextDouble();
@@ -61,19 +65,31 @@ public class Solution
     }
 
 	//Calcula en cuál clase se encuentra determinado valor
+	/**
+	 * Método que determina en cual intervalo o clase se encuentra un determinado valor.
+	 * 
+	 * @param valor Valor que se debe encontrar dentro del arreglo
+	 * @param min Valor mínimo del arreglo
+	 * @param incremento Incremento de los valores, que da lugar al supremo y al infimo de cada intervalo
+	 * @return Valor del tipo {@code int} que indica en cuál intervalo se encuentra dicho valor
+	 */
 	public int encontrarClase(double valor, double min, double incremento) {
-		
 		int clase = (int)((valor - min)/incremento);
-		
 		return clase;
 	}
 
-	// Print a histogram for the data
+	/**
+	 * Método que imprime el histrograma requerido, a partir de los datos preliminares obtenidos y utilizando los métodos anteriores.
+	 * 
+	 * @param values Arreglo donde se encuentran cada uno de los valores recopilados
+	 * @param classes Número de intervalos a desplegar
+	 * @param integerDigits Cantidad de dígitos enteros que van a poseer los extremos de cada intervalo
+	 * @param decimalDigits Cantidad de dígitos decimales que van a poseer los extremos de cada intervalo
+	 */
 	public void printHistogram(double[] values, int classes, int integerDigits, int decimalDigits) {
 		
-		//Primero, se ordenan los valores del arreglo
 		double min, max;
-		
+
 		min = max = values[0];
 		for (int i = 0; i < values.length; i++) {
 			if (values[i]<min) min = values[i];
