@@ -53,9 +53,50 @@ public class Solution
 
     // Implement missing and required methods here
 
-    void readValues() {
-
+	// Read the values and store them into the array
+	public void readValues(double arreglo[]) {
+		for (int i = 0; i < arreglo.length; i++) {
+			arreglo[i] = this.input.nextDouble();
+		}
     }
-    
 
+	//Calcula en cuál clase se encuentra determinado valor
+	public int encontrarClase(double valor, double min, double incremento) {
+		
+		int clase = (int)((valor - min)/incremento);
+		
+		return clase;
+	}
+
+	// Print a histogram for the data
+	public void printHistogram(double[] values, int classes, int integerDigits, int decimalDigits) {
+		
+		//Primero, se ordenan los valores del arreglo
+		double min, max;
+		
+		min = max = values[0];
+		for (int i = 0; i < values.length; i++) {
+			if (values[i]<min) min = values[i];
+			if (values[i]>max) max = values[i];
+		}
+
+		double incrementoW = (max - min) / classes;
+		double minIntervalo = min;
+
+		//Aquí va lo bonito
+		String formatoNumerico = toString(integerDigits)+"."+toString(decimalDigits);
+		for (int i = 1; i <= classes; i++) {
+			if (i == classes) {
+				System.out.printf("[%"+formatoNumerico+"f, %"+formatoNumerico+"f ] | ", (i-1)*incrementoW, i*incrementoW);
+			} else {
+				System.out.printf("[%"+formatoNumerico+"f, %"+formatoNumerico+"f [ | ", (i-1)*incrementoW, i*incrementoW);
+			}
+			for (int j = 0; j < values.length; j++) {
+				if (encontrarClase(values[j], min, incrementoW) == i ) {
+					System.out.print("*");
+				}
+			}
+			System.out.println();
+		}
+	}
 }
