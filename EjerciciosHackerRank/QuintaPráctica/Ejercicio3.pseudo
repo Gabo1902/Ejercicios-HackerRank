@@ -1,11 +1,13 @@
 procedure run() do 
 
-    crear this.input := crearEntradaDelimitando("[:|\\s]");
+    crear this.input := nuevaEntrada();
+    usarDelimitador(this.input, "[:|\\s]");
+
     crear elementosSolicitados := leerInt();
     crear tareaDePrueba := crearArreglo[elementosSolicitados];
 
     for i = 0; i < tareaDePrueba.length; i++ do 
-        tareaDePrueba[i] = this.input.leerString(); //Aquí ya tengo el arreglo hecho
+    tareaDePrueba[i] = this.input.leerString(); //Aquí ya tengo el arreglo hecho
     end for
     
     leerLinea();
@@ -13,7 +15,7 @@ procedure run() do
         crear estudiante := leerInt();
         crear tareaSospechosa := crearArreglo[elementosSolicitados];
         for i = 0; i < elementosSolicitados; i++ do
-            crear tareaSospechosa[i] = this.input.leerString(); //Aquí ya tengo hecho el arreglo a juzgar
+            tareaSospechosa[i] = this.input.leerString(); //Aquí ya tengo hecho el arreglo a juzgar
         end for
         inspeccionar(estudiante, elementosSolicitados, tareaDePrueba, tareaSospechosa);
     end while
@@ -39,7 +41,7 @@ procedure void inspeccionar(caso, longitudArreglos, arreglo1, arreglo2) do
     if coincidencias >= longitudArreglos do
         print caso + ": plagiarism";
     else do
-        porCoincidencias = ((k-diferencias)/k)*100;
+        crear porCoincidencias := ((k-diferencias)/k)*100;
         print "%d: %.0f", caso, porCoincidencias;
     end if
 end procedure
