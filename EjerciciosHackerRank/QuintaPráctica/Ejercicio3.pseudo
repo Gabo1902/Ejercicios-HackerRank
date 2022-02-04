@@ -1,0 +1,45 @@
+procedure run() do 
+
+    crear this.input := crearEntradaDelimitando("[:|\\s]");
+    crear elementosSolicitados := leerInt();
+    crear tareaDePrueba := crearArreglo[elementosSolicitados];
+
+    for i = 0; i < tareaDePrueba.length; i++ do 
+        tareaDePrueba[i] = this.input.leerString(); //Aquí ya tengo el arreglo hecho
+    end for
+    
+    leerLinea();
+    while haySiguienteLinea() do
+        crear estudiante := leerInt();
+        crear tareaSospechosa := crearArreglo[elementosSolicitados];
+        for i = 0; i < elementosSolicitados; i++ do
+            crear tareaSospechosa[i] = this.input.leerString(); //Aquí ya tengo hecho el arreglo a juzgar
+        end for
+        inspeccionar(estudiante, elementosSolicitados, tareaDePrueba, tareaSospechosa);
+    end while
+end procedure
+
+procedure void inspeccionar(caso, longitudArreglos, arreglo1, arreglo2) do
+    
+    crear k = castear(longitudArreglos, double);
+
+    crear coincidencias := 0.0;
+    crear diferencias := 0.0;
+    for i = 0; i < longitudArreglos; i++ do
+        for j = 0; j < longitudArreglos; do
+            if arreglo1[i] == arreglo2[j] do 
+                coincidencias++;
+            else do
+                diferencias++;
+            end if
+        end for
+    end for
+
+    //juzga si hay plagio o no
+    if coincidencias >= longitudArreglos do
+        print caso + ": plagiarism";
+    else do
+        porCoincidencias = ((k-diferencias)/k)*100;
+        print "%d: %.0f", caso, porCoincidencias;
+    end if
+end procedure
