@@ -47,7 +47,6 @@ public class Solution {
         }
     }
 
-    //El problema está aquí
     /**
      * Método que identifica el grado de similitud entre los valores de dos arreglos. Si hay un 100% de similitud, imprime que hay plagio, de lo contrario imprime el porcentaje de coincidencias.
      * 
@@ -63,11 +62,13 @@ public class Solution {
         double diferencias = 0.0;
 
         //Identifica si hay coincidencias o no
-        for (int i = 0; i < longitudArreglos; i++) {
-            for (int j = 0; j < longitudArreglos; j++) {
-                String cadena = arreglo1[i];
-                if (cadena.equals(arreglo2[j])) {
+        for (int j = 0; j < longitudArreglos; j++) {
+            String cadena = arreglo2[j];
+            for (int i = 0; i < longitudArreglos; i++) {
+                
+                if (cadena.equals(arreglo1[i])) {
                     coincidencias++;
+                    break;
                 }
             }
         }
