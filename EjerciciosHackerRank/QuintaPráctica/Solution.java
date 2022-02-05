@@ -18,22 +18,28 @@ public class Solution {
     public void run(){
 
         this.input = new Scanner(System.in);
-        this.input.useDelimiter("(([:][\\s])|([\\s][|][\\s]))+");
+        this.input.useDelimiter("([:][\\s])|([\\s][|][\\s])|(\\n)");
 
         int elementosSolicitados = this.input.nextInt();
         String[] tareaDePrueba = new String[elementosSolicitados];
-
+        
         for (int i = 0; i < tareaDePrueba.length; i++) {
 
             tareaDePrueba[i] = this.input.next();
         }
-
+        
+        /*
+        System.out.println(Arrays.toString(tareaDePrueba));
+        System.out.println(tareaDePrueba[4]);
+        */
+        
         this.input.nextLine();
-        while (this.input.hasNextLine()) {
+        while (this.input.hasNext()) {
 
             int estudiante = this.input.nextInt();
             String[] tareaSospechosa = new String[elementosSolicitados];
-
+            
+            //Lee las tareas sospechosas
             for (int j = 0; j < tareaSospechosa.length; j++) {
                 tareaSospechosa[j] = this.input.next();
             }
@@ -41,6 +47,7 @@ public class Solution {
         }
     }
 
+    //El problema está aquí
     /**
      * Método que identifica el grado de similitud entre los valores de dos arreglos. Si hay un 100% de similitud, imprime que hay plagio, de lo contrario imprime el porcentaje de coincidencias.
      * 
@@ -58,10 +65,9 @@ public class Solution {
         //Identifica si hay coincidencias o no
         for (int i = 0; i < longitudArreglos; i++) {
             for (int j = 0; j < longitudArreglos; j++) {
-                if (arreglo1[i] == arreglo2[j]) {
+                String cadena = arreglo1[i];
+                if (cadena.equals(arreglo2[j])) {
                     coincidencias++;
-                } else {
-                    diferencias++;
                 }
             }
         }
@@ -70,8 +76,12 @@ public class Solution {
         if (coincidencias >= longitudArreglos) {
             System.out.println(caso + ": plagiarism");
         } else {
-            double porCoincidencias = ((k-diferencias)/k)*100;
-            System.out.printf("%d: %.0f", caso, porCoincidencias);
+            double porCoincidencias = (coincidencias/longitudArreglos)*100;
+            if (porCoincidencias == 0) {
+                System.out.printf("%d: original%n", caso);
+            } else {
+                System.out.printf("%d: %.0f%%%n", caso, porCoincidencias);
+            }
         }
     }
 }
