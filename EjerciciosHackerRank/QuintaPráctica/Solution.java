@@ -18,7 +18,7 @@ public class Solution {
     public void run(){
 
         this.input = new Scanner(System.in);
-        this.input.useDelimiter("[:|\\s]");
+        this.input.useDelimiter("(([:][\\s])|([\\s][|][\\s]))+");
 
         int elementosSolicitados = this.input.nextInt();
         String[] tareaDePrueba = new String[elementosSolicitados];
@@ -49,7 +49,7 @@ public class Solution {
      * @param arreglo1 Primer arreglo a inspeccionar
      * @param arreglo2 Segundo arreglo a inspeccionar
      */
-    public void inspeccionar(int caso, int longitudArreglos, int[] arreglo1, int[] arreglo2) {
+    public void inspeccionar(int caso, int longitudArreglos, String[] arreglo1, String[] arreglo2) {
 
         double k = (double) longitudArreglos;
         double coincidencias = 0.0;
