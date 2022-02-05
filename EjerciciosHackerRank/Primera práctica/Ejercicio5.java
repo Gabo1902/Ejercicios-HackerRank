@@ -36,7 +36,7 @@ class Solution
         int month = this.input.nextInt();
         int day = this.input.nextInt();
         
-        System.out.printf("%02d/%02d/%02d", year, month, day);
+        System.out.printf("%04d/%02d/%02d", year, month, day);
 
 		// Close the standard input
 		this.input.close();
