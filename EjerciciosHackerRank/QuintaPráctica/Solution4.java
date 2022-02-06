@@ -1,9 +1,10 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 /**
  * Automatic judge that calculates the result of a tic tac toe game
  */
-public class Solution4
+public class Solution
 {
 	/**
 	 * Gets data from standard input
@@ -16,7 +17,7 @@ public class Solution4
 	 */
 	public static void main(String[] args)
 	{
-		Solution4 solution = new Solution4();
+		Solution solution = new Solution();
 		solution.run();
 	}
 
@@ -31,71 +32,79 @@ public class Solution4
 		// This code replicates the input to the standard output
 		// Modify this code to solve the problem
         int n = 3;
-		int[][] matriz = new Int[3][3];
+        String[][] matriz = new String[n][n];
 
-        int jugadasX = 0;
-        int jugadasO = 0;
+        int jugadasJO = 0;
+        int jugadasJX = 0;
         int casillasVacias = 0;
 
-        int productoTotal = 1;
-
-        for (int i = 0; i < matriz.length; i++) {
-            String entrada = this.input.nextLine();
+        //Crea la matriz y cuenta las jugadas
+		for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {
-                char caracter = entrada.charAt(j);
-                if (caracter == 'X') {
-                    matriz[i][j] = 5;
-                    jugadasX++;
-                } else if (caracter == 'O') {
-                    matriz[i][j] = 7;
-                    jugadasO++;
-                } else {
-                    matriz[i][j] = 0;
-                    casillasVacias++;
-                }
+                String cadena = this.input.next(); 
+                matriz[i][j] = cadena;
+                if (cadena.equals("X")) jugadasJX++;
+                else if (cadena.equals("O")) jugadasJO++;
+                else if (cadena.equals("-")) casillasVacias++;
             }
         }
-
-        for (int i = 0; i < matriz.length; i++) {
-            int sumaFila = 0;
-            for (int j = 0; j < matriz.length; j++) {
-                sumaFila += matriz[i][j];
-            }
-            productoTotal *= sumaFila;
-        }
-
-        for (int j = 0; j < matriz.length; j++) {
-            int sumaColumna = 0;
-            for (int i = 0; i < matriz.length; i++) {
-                sumaColumna += matriz[i][j];
-            }
-            productoTotal *= sumaColumna;
-        }
-
-        int sumaDiagonalDes = 0;
-        int sumaDiagonalAsc = 0;
-        for (int k = 0; k < matriz.length; k++) {
-            sumaDiagonalDes += matriz[k][k];
-            sumaDiagonalAsc += matriz[n-1-k][k];
-        }
-
-        productoTotal *= sumaDiagonalDes*sumaDiagonalAsc;
-        boolean esMultiploDe5n = productoTotal % (5*n) == 0;
-        boolean esMultiploDe7n = productoTotal % (7*n) == 0;
-
-        if (esMultiploDe5n && esMultiploDe7n) {
-            System.out.println("E");
-        } else if (esMultiploDe5n) {
-            System.out.println("X");
-        } else if (esMultiploDe7n) {
-            System.out.println("O");
-        } else if (casillasVacias != 0) {
-            System.out.println("-");
-        } else {
-            System.out.println("=");
-        }
-
+        juezGato(matriz, jugadasJX, jugadasJO, casillasVacias);
 		// Close the standard input
 		this.input.close();
 	}
+
+    public void juezGato(String[][] matriz, int jugadasJX, int jugadasJO, int casillasVacias) {
+
+        String[] vectorDeX = {"X","X","X"};
+        String[] vectorDeO = {"O","O","O"};
+
+        boolean ganaX = false;
+        boolean ganaO = false;
+
+        //Recorre filas
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                fila[j] = matriz[i][j];
+            }
+            if (fila.equals(vectorDeX)) ganaX = true;
+            else if (fila.equals(vectorDeO)) ganaO = true;
+        }
+
+        //Recorre columnas
+        for (int j = 0; j < matriz.length; j++) {
+            String[] columna = new String[matriz.length];
+            for (int i = 0; i < matriz.length; i++) {
+                columna[i] = matriz[i][j];
+            }
+            if (columna.equals(vectorDeX)) ganaX = true;
+            else if (columna.equals(vectorDeO)) ganaO = true;
+        }
+
+        //Recorre diagonales
+        String[] diagonal1 = new String[matriz.length];
+        String[] diagonal2 = new String[matriz.length];
+        for (int i = 0; i < matriz.length; i++) {
+            diagonal1[i] = matriz[i][i];
+            diagonal2[i] = matriz[matriz.length-1-i][i];
+            if (diagona1[i].equals(vectorDeX) || diagonal2[i].equals(vectorDeX)) {
+                ganaX = true;
+            } else if (diagona1[i].equals(vectorDeO) || diagonal2[i].equals(vectorDeO)) {
+                ganaO = true;
+            } 
+        }
+
+        boolean gananAmbos = ganaX && ganaO;
+        boolean hayMasJugadasDeX = (jugadasJO+2 <= jugadasJX);
+        boolean hayMasJugadasDeO = (jugadasJX+2 <= jugadasJO);
+
+        if (gananAmbos || hayMasJugadasDeX || hayMasJugadasDeO) {
+            System.out.print("E");
+        } else if (ganaX) {
+            System.out.print("X");
+        } else if (ganaO) {
+            System.out.print("O");
+        } else {
+            System.out.print("-");
+        }
+    }
 }
