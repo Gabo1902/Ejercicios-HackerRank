@@ -6,63 +6,65 @@ import java.util.Arrays;
  */
 public class Solution
 {
-	/**
-	 * Gets data from standard input
-	 */
-	private Scanner input = null;
+    /**
+     * Gets data from standard input
+     */
+    private Scanner input = null;
 
-	/**
-	 * Start the execution of the solution
-	 * @param args Command line arguments
-	 */
-	public static void main(String[] args)
-	{
-		Solution solution = new Solution();
-		solution.run();
-	}
+    /**
+     * Start the execution of the solution
+     * @param args Command line arguments
+     */
+    public static void main(String[] args)
+    {
+        Solution solution = new Solution();
+        solution.run();
+    }
 
-	/**
-	 * Run the solution. This method is called from main()
-	 */
-	public void run()
-	{
-		// Create object to read data from standard input
-		this.input = new Scanner(System.in);
+    /**
+     * Run the solution. This method is called from main()
+     */
+    public void run()
+    {
+        // Create object to read data from standard input
+        this.input = new Scanner(System.in);
 
-		// This code replicates the input to the standard output
-		// Modify this code to solve the problem
+        // This code replicates the input to the standard output
+        // Modify this code to solve the problem
         int n = 3;
-        String[][] matriz = new String[n][n];
+        char[][] matriz = new char[n][n];
 
         int jugadasJO = 0;
         int jugadasJX = 0;
         int casillasVacias = 0;
 
         //Crea la matriz y cuenta las jugadas
-		for (int i = 0; i < matriz.length; i++) {
+        for (int i = 0; i < matriz.length; i++) {
+            String cadena = this.input.nextLine(); 
             for (int j = 0; j < matriz.length; j++) {
-                String cadena = this.input.next(); 
-                matriz[i][j] = cadena;
-                if (cadena.equals("X")) jugadasJX++;
-                else if (cadena.equals("O")) jugadasJO++;
-                else if (cadena.equals("-")) casillasVacias++;
+                matriz[i][j] = cadena.charAt(j);
+                if (cadena.equals('X')) jugadasJX++;
+                else if (cadena.equals('O')) jugadasJO++;
+                else if (cadena.equals('-')) casillasVacias++;
             }
         }
         juezGato(matriz, jugadasJX, jugadasJO, casillasVacias);
-		// Close the standard input
-		this.input.close();
-	}
+        // Close the standard input
+        this.input.close();
+    }
 
-    public void juezGato(String[][] matriz, int jugadasJX, int jugadasJO, int casillasVacias) {
+    
+    public void juezGato(char[][] matriz, int jugadasJX, int jugadasJO, int casillasVacias) {
 
-        String[] vectorDeX = {"X","X","X"};
-        String[] vectorDeO = {"O","O","O"};
+        char[] vectorDeX = {'X','X','X'};
+        char[] vectorDeO = {'O','O','O'};
 
         boolean ganaX = false;
         boolean ganaO = false;
 
         //Recorre filas
         for (int i = 0; i < matriz.length; i++) {
+            char[] fila = new char[matriz.length];
             for (int j = 0; j < matriz.length; j++) {
                 fila[j] = matriz[i][j];
             }
@@ -72,7 +74,7 @@ public class Solution
 
         //Recorre columnas
         for (int j = 0; j < matriz.length; j++) {
-            String[] columna = new String[matriz.length];
+            char[] columna = new char[matriz.length];
             for (int i = 0; i < matriz.length; i++) {
                 columna[i] = matriz[i][j];
             }
@@ -81,14 +83,14 @@ public class Solution
         }
 
         //Recorre diagonales
-        String[] diagonal1 = new String[matriz.length];
-        String[] diagonal2 = new String[matriz.length];
+        char[] diagonal1 = new char[matriz.length];
+        char[] diagonal2 = new char[matriz.length];
         for (int i = 0; i < matriz.length; i++) {
             diagonal1[i] = matriz[i][i];
             diagonal2[i] = matriz[matriz.length-1-i][i];
-            if (diagona1[i].equals(vectorDeX) || diagonal2[i].equals(vectorDeX)) {
+            if (Arrays.equals(diagonal1, vectorDeX) || Arrays.equals(diagonal2, vectorDeX)) {
                 ganaX = true;
-            } else if (diagona1[i].equals(vectorDeO) || diagonal2[i].equals(vectorDeO)) {
+            } else if (Arrays.equals(diagonal1, vectorDeO) || Arrays.equals(diagonal2, vectorDeO)) {
                 ganaO = true;
             } 
         }
@@ -106,5 +108,5 @@ public class Solution
         } else {
             System.out.print("-");
         }
-    }
+    }  
 }
