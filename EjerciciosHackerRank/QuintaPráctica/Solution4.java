@@ -36,25 +36,40 @@ public class Solution
 
         int jugadasJO = 0;
         int jugadasJX = 0;
-        int casillasVacias = 0;
+        boolean hayCasillasVacias = false;
+        boolean hayEntradaErronea = false;
 
         //Crea la matriz y cuenta las jugadas
         for (int i = 0; i < matriz.length; i++) {
             String cadena = this.input.nextLine(); 
             for (int j = 0; j < matriz.length; j++) {
                 matriz[i][j] = cadena.charAt(j);
-                if (cadena.equals('X')) jugadasJX++;
-                else if (cadena.equals('O')) jugadasJO++;
-                else if (cadena.equals('-')) casillasVacias++;
+                if (matriz[i][j] == 'X') jugadasJX++;
+                else if (matriz[i][j] == 'O') jugadasJO++;
+                else if (matriz[i][j] == '-') hayCasillasVacias = true;
+                else hayEntradaErronea = true;
             }
         }
-        juezGato(matriz, jugadasJX, jugadasJO, casillasVacias);
+        //Valida si hay entrada errónea
+        if (hayEntradaErronea) {
+            System.out.print("E");
+        } else {
+            juezGato(matriz, jugadasJX, jugadasJO, hayCasillasVacias);    
+        }
         // Close the standard input
         this.input.close();
     }
 
-    
-    public void juezGato(char[][] matriz, int jugadasJX, int jugadasJO, int casillasVacias) {
+    /**
+     * Determina si hay ganador, empate o juego inválido en un juego de gato,
+     * mediante la impresión por salida estándar.
+     * 
+     * @param matriz el gato ya validado de no tener una entrada errónea
+     * @param jugadasJX intentos del jugador X
+     * @param jugadasJO intentos del jugador O
+     * @param hayCasillasVacias indica si el gato posee casillas sin rellenar
+     */
+    public void juezGato(char[][] matriz, int jugadasJX, int jugadasJO, boolean hayCasillasVacias) {
 
         char[] vectorDeX = {'X','X','X'};
         char[] vectorDeO = {'O','O','O'};
@@ -68,8 +83,8 @@ public class Solution
             for (int j = 0; j < matriz.length; j++) {
                 fila[j] = matriz[i][j];
             }
-            if (fila.equals(vectorDeX)) ganaX = true;
-            else if (fila.equals(vectorDeO)) ganaO = true;
+            if (Arrays.equals(fila, vectorDeX)) ganaX = true;
+            else if (Arrays.equals(fila, vectorDeO)) ganaO = true;
         }
 
         //Recorre columnas
@@ -78,8 +93,8 @@ public class Solution
             for (int i = 0; i < matriz.length; i++) {
                 columna[i] = matriz[i][j];
             }
-            if (columna.equals(vectorDeX)) ganaX = true;
-            else if (columna.equals(vectorDeO)) ganaO = true;
+            if (Arrays.equals(columna, vectorDeX)) ganaX = true;
+            else if (Arrays.equals(columna, vectorDeO)) ganaO = true;
         }
 
         //Recorre diagonales
@@ -94,19 +109,21 @@ public class Solution
                 ganaO = true;
             } 
         }
-
+        
         boolean gananAmbos = ganaX && ganaO;
         boolean hayMasJugadasDeX = (jugadasJO+2 <= jugadasJX);
         boolean hayMasJugadasDeO = (jugadasJX+2 <= jugadasJO);
-
+        
         if (gananAmbos || hayMasJugadasDeX || hayMasJugadasDeO) {
             System.out.print("E");
         } else if (ganaX) {
             System.out.print("X");
         } else if (ganaO) {
             System.out.print("O");
+        } else if (!hayCasillasVacias) {
+            System.out.print("=");
         } else {
             System.out.print("-");
         }
-    }  
+    }    
 }
