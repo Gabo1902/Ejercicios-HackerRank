@@ -1,0 +1,94 @@
+procedure run() do 
+
+  //equivale al this.input.useDelimiter()
+  delimitar(entrada, "[\\s\\n]");
+  create n := leerInt();
+  
+  leerLinea();
+  leerLinea();
+
+  create sudoku := crearMatriz(Int)[(n*n)][(n*n)];
+  create hayCasillasVacias := false;
+
+  //Lee el sudoku
+  for int i = 0; i < (n*n); i++ do
+    create linea : = leerString();
+    for int j = 0; i < (n*n); i++ do
+      create caracter := leerChar(linea, j);
+      if caracter == '.' do
+        sudoku[i][j] = 0;
+        hayCasillasVacias = true;
+      else
+        sudoku[i][j] = convertirAInt(caracter);
+      end if
+    end for
+  end for
+
+  if n <= 0 do 
+    print "e"
+  else if hayCasillasVacias do
+    
+  else 
+  
+  end if
+
+  examinarFila(sudoku);
+  examinarColumna(sudoku);
+
+
+
+  //examinarBloque(sudoku);
+end procedure
+
+procedure examinarFila(int n, int[][] sudoku) do
+  //Examina si hay filas con valores repetidos
+  for int i = 0; i < (n*n); i++ do
+    for int j = 0; j < (n*n); j++ do
+      create casilla := sudoku[i][j];
+      if seRepite(casilla) do
+        return 
+        print "r%d,%d", (i+1), (j+1);
+      
+      
+      
+      end if
+    end for
+  end for 
+end procedure
+
+procedure examinarColumna(int n, int[][] sudoku) do
+  //Examina si hay columnas con valores repetidos
+  for int j = 0; j < (n*n); j++ do
+    for int i = 0; i < (n*n); i++ do
+      create casilla := sudoku[i][j];
+      if seRepite(casilla) do
+        print "c%d,%d", (i+1), (j+1);
+      end if
+    end for
+  end for 
+end procedure
+
+procedure seRepite()
+
+
+
+
+
+
+procedure examinarBloque(int n, int[][] sudoku) do
+  
+  //Examina si hay bloques con valores repetidos
+  for int b = 0; b < n; k++ do
+    create bloque = crearMatriz(int)[n][n];
+    for int i = 0; i < n, i++ do
+      for int j = 0; j < n, j++ do
+        create filaBloque := sudoku[i+b][j+b];
+        create columnaBloque := sudoku[i+b][j+b];
+
+
+      end for
+    end for
+  end for
+
+
+end procedure
