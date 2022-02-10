@@ -22,16 +22,12 @@ procedure run() do
   end for
 end procedure
 
-procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do 
-
-
-  crear n := numeroDeFilas(mapaOculto);
-  crear m := numeroDeColumnas(mapaOculto);
-  crear mapaRevelado := crearMatriz(char)[n][m];
+procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do
+  crear mapaRevelado := crearMatriz(char)[mapaOculto.lenght][mapaOculto[0].lenght];
 
   //Agregar el mar al mapa revelado
-  for i = 0; i < n; i++ do
-    for j = 0; j < m; j++ do
+  for i = 0; i < mapaOculto.lenght; i++ do
+    for j = 0; j < mapaOculto[0].lenght; j++ do
       if mapaOculto[i][j] < 0 do
         mapaRevelado[i][j] = '~';
       end if
@@ -39,13 +35,11 @@ procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do
   end for
 
   //Revela el camino
-  crear haTerminadoElCamino := false;
-  crear casilla := mapaOculto[filaInicial][columnaInicial];
-  fila = filaInicial;
-  columna = columnaInicial;
-  crear casillaAnterior := 0;
+  crear fila := filaInicial;
+  crear columna := columnaInicial;
+  crear casilla := mapaOculto[fila][columna];
   crear contador := 0;
-  crear camino := crearArreglo[1];
+  crear haTerminadoElCamino := false;
   while haTerminadoElCamino do
     if casilla < 0 do
       print "sea"; //el camino lleva al mar
@@ -57,7 +51,7 @@ procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do
       mapaRevelado[fila][columna] = '.';
       print "loop"; //el camino tiene un ciclo
       break;
-    else if casilla == casillaAnterior do
+    else if casilla == mapaOculto[fila][columna] do
       print "treasure";
       mapaRevelado[fila][columna] = 'X';
       haTerminadoElCamino = true;
@@ -65,17 +59,24 @@ procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do
       mapaRevelado[fila][columna] = '.';
       contador++;
     end if
-    casillaAnterior = casilla;
-    fila = casillaAnterior/10;
-    columna = casillaAnterior%10;
+    fila = casilla/10;
+    columna = casilla%10;
     casilla = mapaOculto[fila][columna];
   end while
 
   //revisar si hay explosivos
-
-
+  for i = 0; i < mapaOculto.lenght; i++ do
+    for j = 0; j < mapaOculto[0].lenght; j++ do
+      if mapaRevelado[i][j] == 'X' || mapaRevelado[i][j] == '~' do
+        //do nothing
+      else if mapaOculto[i][j] == mapaOculto[mapaOculto[i][j]]/10][mapaOculto[i][j]]%10] do
+        print "!";
+      end if
+    end for
+  end for
 end procedure 
 
+//Método que me dice si hay un loop o no.
 procedure boolean hayLoop(valor, contador, mapaOculto, filaInicial, columnaInicial) do
   if contador == 0 do 
     return false;
