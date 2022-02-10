@@ -22,7 +22,7 @@ procedure run() do
   end for
 end procedure
 
-procedure revelarMapa(mapaOculto, filaInicial, columnaInicial) do 
+procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do 
 
 
   crear n := numeroDeFilas(mapaOculto);
@@ -38,28 +38,22 @@ procedure revelarMapa(mapaOculto, filaInicial, columnaInicial) do
     end for
   end for
 
-  //Revelar camino
-  crear casillaInicial := mapaOculto[filaInicial][columnaInicial];
-  for i = 0; i < n; i++ do
-    for j = 0; j < m; j++ do
-      
-    end for
-  end for
-
+  //Revela el camino
   crear haTerminadoElCamino := false;
   crear casilla := mapaOculto[filaInicial][columnaInicial];
   fila = filaInicial;
   columna = columnaInicial;
   crear casillaAnterior := 0;
   crear contador := 0;
-  while !haTerminadoElCamino do
+  crear camino := crearArreglo[1];
+  while haTerminadoElCamino do
     if casilla < 0 do
       print "sea"; //el camino lleva al mar
       break;
     else if (casilla/10 < 1)||(casilla/10>mapaOculto.lenght)||(casilla%10 < 1)||(casilla%10 > mapaOculto[0].lenght) do
       print "error"; //el camino se sale del mapa
       break;
-    else if hayUnLoop(casilla, contador) do
+    else if hayLoop(casilla, contador, mapaOculto, filaInicial, columnaInicial) do
       mapaRevelado[fila][columna] = '.';
       print "loop"; //el camino tiene un ciclo
       break;
@@ -70,25 +64,33 @@ procedure revelarMapa(mapaOculto, filaInicial, columnaInicial) do
     else do
       mapaRevelado[fila][columna] = '.';
       contador++;
-    end if 
+    end if
     casillaAnterior = casilla;
     fila = casillaAnterior/10;
     columna = casillaAnterior%10;
     casilla = mapaOculto[fila][columna];
   end while
 
+  //revisar si hay explosivos
 
 
-
-
-
-  crear casillaInicial := mapaOculto[filaInicial][columnaInicial];
-  crear casillaSiguiente := mapaOculto[casillaInicial / 10][casillaInicial % 10];
-  while casillaInicial != casillaSiguiente do
-    casillaActual =  
-  end while
-
-
-
-  return mapaRevelado;
 end procedure 
+
+procedure boolean hayLoop(valor, contador, mapaOculto, filaInicial, columnaInicial) do
+  if contador == 0 do 
+    return false;
+  else
+    hayLoop = false;
+    crear casillaCamino = mapaOculto[filaInicial][columnaInicial];
+    for i = 0; i <= contador; i++ do
+      if casillaCamino == valor do
+        hayLoop = true;
+        break;
+      else do
+        casillaAnterior = casillaCamino;
+        casillaCamino = mapaOculto[casillaAnterior/10][casillaAnterior%10];  
+      end if
+    end for
+    return hayLoop;
+  end if
+end procedure
