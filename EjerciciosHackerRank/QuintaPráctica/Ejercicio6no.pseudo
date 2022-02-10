@@ -1,0 +1,30 @@
+    void run() {
+        this.input = new Scanner(System.in);
+        //La entrada estándar delimita los espacios y los saltos de línea
+        this.input.useDelimiter("[\\s\\n]");
+        
+        int numFilas = this.input.nextInt();
+        int numColumnas = this.input.nextInt();
+        int[][] mapaOculto = new int[numFilas][numColumnas];
+        int[][] mapaRevelado = new int[numFilas][numColumnas];
+
+        //En el mapa oculto para niños las filas y las columnas se inician desde 1
+        int filaDeInicio = this.input.nextInt() - 1;
+        int columnaDeInicio = this.input.nextInt() - 1;
+
+        //Nos comemos la línea entre las info y la matriz de números
+        this.input.nextLine();
+
+        //Leer la matriz oculta
+        for(int i = 0; i < numFilas; i++) {
+            for (int j = 0; j < numColumnas; j++) {
+                mapaOculto[i][j] = this.input.nextInt();
+            }
+        }
+        //Aquí hay que insertar un método que imprima el mapa revelado
+        this.input.close();
+    }
+
+    void revelarMapa() {
+
+    }

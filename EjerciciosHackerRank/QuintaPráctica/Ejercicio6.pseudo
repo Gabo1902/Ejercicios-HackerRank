@@ -1,30 +1,94 @@
-    void run() {
-        this.input = new Scanner(System.in);
-        //La entrada estándar delimita los espacios y los saltos de línea
-        this.input.useDelimiter("[\\s\\n]");
-        
-        int numFilas = this.input.nextInt();
-        int numColumnas = this.input.nextInt();
-        int[][] mapaOculto = new int[numFilas][numColumnas];
-        int[][] mapaRevelado = new int[numFilas][numColumnas];
+procedure run() do
+  
+  delimitar(entrada, "[\\s\\n]");
 
-        //En el mapa oculto para niños las filas y las columnas se inician desde 1
-        int filaDeInicio = this.input.nextInt() - 1;
-        int columnaDeInicio = this.input.nextInt() - 1;
+  crear numFilas := leerEntero();
+  crear numColumnas := leerEntero();
+  crear mapaOculto := crearMatriz(int)[numFilas][numColumnas];
+  crear mapaRevelado := crearMatriz(char)[numFilas][numColumnas];
 
-        //Nos comemos la línea entre las info y la matriz de números
-        this.input.nextLine();
+  //En el mapa oculto para niños las filas y las columnas se inician desde 1
+  crear filaDeInicio := leerEntero();
+  crear columnaDeInicio := leerEntero();
 
-        //Leer la matriz oculta
-        for(int i = 0; i < numFilas; i++) {
-            for (int j = 0; j < numColumnas; j++) {
-                mapaOculto[i][j] = this.input.nextInt();
-            }
-        }
-        //Aquí hay que insertar un método que imprima el mapa revelado
-        this.input.close();
-    }
+  //Nos comemos la línea entre la info inicial y la matriz de números
+    leerLinea();
 
-    void revelarMapa() {
+  //Leer la matriz oculta
+  for i = 0; i < numColumnas; i++ do 
+    for j = 0; j < numColumnas; j++ do 
+      mapaOculto[i][j] = leerEntero();
+    end for
+  end for
+end procedure
 
-    }
+procedure revelarMapa(mapaOculto, filaInicial, columnaInicial) do 
+
+
+  crear n := numeroDeFilas(mapaOculto);
+  crear m := numeroDeColumnas(mapaOculto);
+  crear mapaRevelado := crearMatriz(char)[n][m];
+
+  //Agregar el mar al mapa revelado
+  for i = 0; i < n; i++ do
+    for j = 0; j < m; j++ do
+      if mapaOculto[i][j] < 0 do
+        mapaRevelado[i][j] = '~';
+      end if
+    end for
+  end for
+
+  //Revelar camino
+  crear casillaInicial := mapaOculto[filaInicial][columnaInicial];
+  for i = 0; i < n; i++ do
+    for j = 0; j < m; j++ do
+      
+    end for
+  end for
+
+  crear haTerminadoElCamino := false;
+  crear casilla := mapaOculto[filaInicial][columnaInicial];
+  fila = filaInicial;
+  columna = columnaInicial;
+  crear casillaAnterior := 0;
+  crear contador := 0;
+  while !haTerminadoElCamino do
+    if casilla < 0 do
+      print "sea"; //el camino lleva al mar
+      break;
+    else if (casilla/10 < 1)||(casilla/10>mapaOculto.lenght)||(casilla%10 < 1)||(casilla%10 > mapaOculto[0].lenght) do
+      print "error"; //el camino se sale del mapa
+      break;
+    else if hayUnLoop(casilla, contador) do
+      mapaRevelado[fila][columna] = '.';
+      print "loop"; //el camino tiene un ciclo
+      break;
+    else if casilla == casillaAnterior do
+      print "treasure";
+      mapaRevelado[fila][columna] = 'X';
+      haTerminadoElCamino = true;
+    else do
+      mapaRevelado[fila][columna] = '.';
+      contador++;
+    end if 
+    casillaAnterior = casilla;
+    fila = casillaAnterior/10;
+    columna = casillaAnterior%10;
+    casilla = mapaOculto[fila][columna];
+  end while
+
+
+
+
+
+
+  crear casillaInicial := mapaOculto[filaInicial][columnaInicial];
+  crear casillaSiguiente := mapaOculto[casillaInicial / 10][casillaInicial % 10];
+  while casillaInicial != casillaSiguiente do
+    casillaActual =  
+  end while
+
+
+
+  return mapaRevelado;
+end procedure 
