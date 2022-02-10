@@ -5,8 +5,7 @@ procedure run() do
   crear numFilas := leerEntero();
   crear numColumnas := leerEntero();
   crear mapaOculto := crearMatriz(int)[numFilas][numColumnas];
-  crear mapaRevelado := crearMatriz(char)[numFilas][numColumnas];
-
+  
   //En el mapa oculto para niños las filas y las columnas se inician desde 1
   crear filaDeInicio := leerEntero();
   crear columnaDeInicio := leerEntero();
@@ -20,6 +19,7 @@ procedure run() do
       mapaOculto[i][j] = leerEntero();
     end for
   end for
+  revelarMapa(mapaOculto, filaDeInicio. columnaDeInicio);
 end procedure
 
 procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do
@@ -42,17 +42,17 @@ procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do
   crear haTerminadoElCamino := false;
   while haTerminadoElCamino do
     if casilla < 0 do
-      print "sea"; //el camino lleva al mar
+      println("sea"); //el camino lleva al mar
       break;
     else if (casilla/10 < 1)||(casilla/10>mapaOculto.lenght)||(casilla%10 < 1)||(casilla%10 > mapaOculto[0].lenght) do
-      print "error"; //el camino se sale del mapa
+      println("error"); //el camino se sale del mapa
       break;
     else if hayLoop(casilla, contador, mapaOculto, filaInicial, columnaInicial) do
       mapaRevelado[fila][columna] = '.';
-      print "loop"; //el camino tiene un ciclo
+      println("loop"); //el camino tiene un ciclo
       break;
     else if casilla == mapaOculto[fila][columna] do
-      print "treasure";
+      println("treasure");
       mapaRevelado[fila][columna] = 'X';
       haTerminadoElCamino = true;
     else do
@@ -74,6 +74,20 @@ procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do
       end if
     end for
   end for
+
+  println();
+
+  //imprimir mapa revelado
+  for i = 0; i < mapaRevelado.lenght; i++ do
+    for j = 0; j < mapaRevelado[0].lenght; j++ do
+      if j != mapaRevelado[0].lenght-1 do
+        print(mapaRevelado[i][j]+" ");
+      else do
+        println(" "+mapaRevelado[i][j]);
+      end if
+    end for
+    println();
+  end for
 end procedure 
 
 //Método que me dice si hay un loop o no.
@@ -81,7 +95,7 @@ procedure boolean hayLoop(valor, contador, mapaOculto, filaInicial, columnaInici
   if contador == 0 do 
     return false;
   else
-    hayLoop = false;
+    crear hayLoop := false;
     crear casillaCamino = mapaOculto[filaInicial][columnaInicial];
     for i = 0; i <= contador; i++ do
       if casillaCamino == valor do
