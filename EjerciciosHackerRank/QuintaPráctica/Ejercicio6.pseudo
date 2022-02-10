@@ -67,10 +67,10 @@ procedure void revelarMapa(mapaOculto, filaInicial, columnaInicial) do
   //revisar si hay explosivos
   for i = 0; i < mapaOculto.lenght; i++ do
     for j = 0; j < mapaOculto[0].lenght; j++ do
-      if mapaRevelado[i][j] == 'X' || mapaRevelado[i][j] == '~' do
+      if (mapaRevelado[i][j] == 'X') || (mapaRevelado[i][j] == '~') do
         //do nothing
       else if mapaOculto[i][j] == mapaOculto[mapaOculto[i][j]]/10][mapaOculto[i][j]]%10] do
-        print "!";
+        mapaRevelado[i][j] = '!';
       end if
     end for
   end for
@@ -102,8 +102,7 @@ procedure boolean hayLoop(valor, contador, mapaOculto, filaInicial, columnaInici
         hayLoop = true;
         break;
       else do
-        casillaAnterior = casillaCamino;
-        casillaCamino = mapaOculto[casillaAnterior/10][casillaAnterior%10];  
+        casillaCamino = mapaOculto[casillaCamino/10][casillaCamino%10];  
       end if
     end for
     return hayLoop;
