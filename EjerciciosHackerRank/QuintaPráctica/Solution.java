@@ -1,5 +1,5 @@
+//Pasa 5/25 casos
 import java.util.Scanner;
-import java.util.Arrays;
 
 /**
  * Validates a treasure map and prints the path from a starting
@@ -77,51 +77,72 @@ public class Solution
     }  
     
     //Revela el camino
+    //Coordenadas de la casilla de turno
     int fila = filaInicial-1;
     int columna = columnaInicial-1;
-    int casilla = mapaOculto[fila][columna];
+    boolean haTerminadoCiclo = false;
     
-    int contador = 0;
-    boolean haTerminadoElCamino = false;
-    
-    while(!haTerminadoElCamino) {
-      int primerDigito = casilla/10;
-      int segundoDigito = casilla%10;
+    int producto = 1;
+    while(!haTerminadoCiclo) {
       
-      if(casilla < 0) {
-        System.out.println("sea"); //El camino lleva al mar
-      } else if((primerDigito < 1)||(primerDigito>mapaOculto.length)||(segundoDigito < 1)||(segundoDigito > mapaOculto[0].length)) {
-          System.out.println("error"); //El camino se sale del mapa
-      } else if(hayLoop(casilla, contador, mapaOculto, filaInicial, columnaInicial)) {
-          mapaRevelado[fila][columna] = '.';
-          System.out.println("loop"); //el camino tiene un ciclo
-        break;
-      } else if(casilla == mapaOculto[primerDigito][segundoDigito]) {
-          System.out.println("treasure");
-          mapaRevelado[fila][columna] = 'X';
-          haTerminadoElCamino = true;
+      int casillaDePaso = mapaOculto[fila][columna];
+      
+      //coordenadas de la casilla siguiente
+      int primerDigito = casillaDePaso/10;
+      int segundoDigito = casillaDePaso%10;
+      
+      
+      if(casillaDePaso<0) {
+        System.out.println("sea");
+        haTerminadoCiclo = true;
+      } else if(primerDigito==0||primerDigito>mapaOculto.length||segundoDigito>mapaOculto[0].length) {
+        System.out.println("error");
+        haTerminadoCiclo = true;
       } else {
+        
+        int casillaSiguiente = mapaOculto[primerDigito-1][segundoDigito-1];
+        
+        if(casillaSiguiente == casillaDePaso) {
+          System.out.println("treasure");
           mapaRevelado[fila][columna] = '.';
-          contador++;
-      }
-      fila = primerDigito;
-      columna = segundoDigito;
-      casilla = mapaOculto[fila][columna];
-    }
-    
-    
-    //Revisar si hay explosivos
-    /*
-    for (int i = 0; i < mapaRevelado.length; i++) {
-      for (int j = 0; j < mapaRevelado[0].length; j++) {
-        if((mapaRevelado[i][j] == 'X') || (mapaRevelado[i][j] == '~')){
-          //No haga nada
-        } else if(mapaOculto[i][j] == mapaOculto[mapaOculto[i][j]/10][mapaOculto[i][j]%10]) {
-            mapaRevelado[i][j] = '!';
+          mapaRevelado[primerDigito-1][segundoDigito-1] = 'X';
+          haTerminadoCiclo = true;
+        } else if(producto%casillaSiguiente==0) {
+          mapaRevelado[fila][columna] = '.';
+          mapaRevelado[primerDigito-1][segundoDigito-1] = '.';
+          System.out.println("loop");
+          haTerminadoCiclo = true;
+        } else {
+          mapaRevelado[fila][columna] = '.';
+          producto *= casillaDePaso;
+          fila = primerDigito-1;
+          columna = segundoDigito-1;
         }
       }
     }
-    */
+    
+    //revisar los explosivos
+    //Revisar si hay explosivos
+    for (int i = 0; i < mapaRevelado.length; i++) {
+      for (int j = 0; j < mapaRevelado[0].length; j++) {
+        int casillaDePaso = mapaOculto[i][j];
+        
+        //obtener las coordenadas de la casilla siguiente
+        int primerDigito = casillaDePaso / 10;
+        int segundoDigito = casillaDePaso % 10;
+        
+        //System.out.println((primerDigito-1)+" "+(segundoDigito-1));
+        
+        
+        if((primerDigito-1)<0||(primerDigito-1)>mapaOculto.length||(segundoDigito-1)>mapaOculto[0].length||mapaRevelado[i][j]=='.'||mapaRevelado[i][j]=='X') {
+          continue;
+        }
+        int casillaSiguiente = mapaOculto[primerDigito-1][segundoDigito-1];
+        if(casillaSiguiente == casillaDePaso) {
+          mapaRevelado[primerDigito-1][segundoDigito-1] = '!';
+        }
+      }
+    }
     
     //Aquí ya está montada la matriz revelada
     System.out.println();
@@ -136,40 +157,6 @@ public class Solution
         } 
       }
       System.out.println();
-    }  
-  }
-  
-  //Método que dice si hay un loop o no
-  public boolean hayLoop(int valor, int contador, int[][] mapaOculto, int filaInicial, int columnaInicial) {
-    if(contador == 0) {
-      return false;
-    } else {
-      boolean hayLoop = false;
-      int casillaCamino = mapaOculto[filaInicial][columnaInicial];
-      for (int i = 0; i <= contador; i++) {
-        if(casillaCamino == valor) {
-          hayLoop = true;
-          break;
-        } else {
-          casillaCamino = mapaOculto[casillaCamino/10][casillaCamino%10];
-        }
-      }
-      return hayLoop;
-    }
+    } 
   }
 }
-
-/*
-
-for(int i = 0; i < numFilas; i++) {
-      for (int j = 0; j < numColumnas; j++) {
-        if(j != numColumnas-1) {
-          System.out.printf("%3d ", mapaOculto[i][j]);
-        } else {
-          System.out.printf("%3d", mapaOculto[i][j]);
-        }
-      }
-      System.out.println();
-    }
-
-*/
