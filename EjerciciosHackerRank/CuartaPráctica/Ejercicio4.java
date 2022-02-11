@@ -1,13 +1,11 @@
-
 import java.util.Scanner;
 
 /**
- * Calculates the coins to give as exchange for some price
+ * Calculates the coins to give as exchange for some price.
  */
-public class Ejercicio4
-{
+public class Ejercicio4 {
 	/**
-	 * Gets data from standard input
+	 * Gets data from standard input.
 	 */
 	private Scanner input = null;
 
@@ -16,7 +14,7 @@ public class Ejercicio4
 	 *
 	 * @param args Command line arguments
 	 */
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		Ejercicio4 solution = new Ejercicio4();
 		solution.run();
@@ -37,50 +35,60 @@ public class Ejercicio4
 		printHeader(fare);
 
 		// Read each payment
-		
-        
-        while ( this.input.hasNextLong() )
-		{
+
+      while (this.input.hasNextLong()) {
 			// Process the payment and print its row in the table
-			printPayment( this.input.nextLong(), fare);
+			printPayment(this.input.nextLong(), fare);
 		}
-        
+
 		// Close the standard input
 		this.input.close();
 	}
 
 
-    // Write your methods here
-    void printHeader(long fare) {
+    /**
+		 * Print header.
+		 * @param fare parametro
+		 */
+    void printHeader(final long fare) {
         if (fare <= 0) {
             System.out.printf("%5d %5s", fare, "error");
         } else {
             System.out.printf("%5d%n", fare);
-            System.out.printf("%5s %5s %3s %3s %3s %3s %3s %3s%n", "PAGO", "VUELT", "500", "100", "50", "25", "10", "5");
-            System.out.printf("%5s %5s %3s %3s %3s %3s %3s %3s%n", "-----", "-----", "---", "---", "---", "---", "---", "---");
+            System.out.printf("%5s %5s %3s %3s %3s %3s %3s %3s%n", "PAGO",
+"VUELT", "500", "100", "50", "25", "10", "5");
+
+            System.out.printf("%5s %5s %3s %3s %3s %3s %3s %3s%n", "-----",
+"-----", "---", "---", "---", "---", "---", "---");
         }
     }
-    
-    void printPayment( long payment, long fare) {
-        
-        if (fare <= 0) {
-            
-        } else {
-        
+
+	
+	/**
+	* Método.
+	* @param payment etiqueta
+	* @param fare etiqueta
+	*/
+  void printPayment(final long payment, final long fare) {
+
+		if (fare <= 0) {
+			//nada
+    } else {
+
             long vuelto = payment - fare;
             String strVuelto = "";
-                
+
             if (payment <= 0) {
                 System.out.printf("%5d ", payment);
                 System.out.printf("%5s%n", "error");
             } else {
-                    
+
                 if (vuelto >= 0) {
                     strVuelto = String.valueOf(vuelto);
                 } else {
                     strVuelto = "insuf ";
                 }
-                    
+
                 System.out.printf("%5d ", payment);
                 System.out.printf("%5s", strVuelto);
                 long sobrante1 = printExchangeCoin(vuelto, 500);
@@ -90,10 +98,11 @@ public class Ejercicio4
                 long sobrante5 = printExchangeCoin(sobrante4, 10);
                 printExchangeCoin(sobrante5, 5);
                 System.out.println();
-            } 
-        }
+							}
+					}
+
     }
-    
+
 	/**
 	 * Print the number of required coins of the given denomination. If no coins
 	 * of this denomination are required, an empty field is printed instead.
@@ -112,10 +121,11 @@ public class Ejercicio4
 		final long coins = exchange / denomination;
 
 		// If there are to give coins, print them, otherwise print an empy field
-		if ( coins > 0 )
+		if (coins > 0) {
 			System.out.printf(" %3d", coins);
-		else
+		} else {
 			System.out.printf("    ");
+		}
 
 		// Return the remaining money to exchange with other denominations
 		return exchange % denomination;

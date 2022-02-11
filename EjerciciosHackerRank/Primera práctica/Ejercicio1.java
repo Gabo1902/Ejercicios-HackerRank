@@ -1,22 +1,18 @@
 import java.util.Scanner;
 
-import javax.swing.plaf.BorderUIResource.EtchedBorderUIResource;
-
 /**
- * Add line numbers to the input
+ * Add line numbers to the input.
  */
-public class Ejercicio1
-{
-	/**
-	 * Gets data from standard input
-	 */
+
+public class Ejercicio1 {
+
 	private Scanner input = null;
 
 	/**
-	 * Start the execution of the solution
+	 * Start the execution of the solution.
 	 * @param args Command line arguments
 	 */
-	public static void main(String args[])
+	public static void main(String final args[])
 	{
 		Ejercicio1 solution = new Ejercicio1();
 		solution.run();
@@ -34,19 +30,18 @@ public class Ejercicio1
         int ancho = this.input.nextInt();
         int hayCeroALaIzq = this.input.nextInt();
         int contador = 1;
-        
-        if( hayCeroALaIzq == 0 ) {
-            
-            while( input.hasNextLine() ) {
+        if (hayCeroALaIzq == 0) {
+
+            while (input.hasNextLine()) {
                 String entrada = this.input.nextLine();
                 System.out.printf("%0*d %s %n", ancho, contador, entrada);
                 contador++;
             }
-        } else if( hayCeroALaIzq == -1 ) {
+        } else if (hayCeroALaIzq == -1) {
 
-            while( input.hasNextLine() ) {
+            while (input.hasNextLine()) {
                 String entrada = this.input.nextLine();
-                System.out.printf( "%*d %s %n", ancho, contador, entrada );
+                System.out.printf("%*d %s %n", ancho, contador, entrada);
                 contador++;
             }
         } //end if
@@ -54,16 +49,11 @@ public class Ejercicio1
         this.input.close();
 
         // Modify this code to solve the problem
-        while ( input.hasNextLine() )
-        {
+        while (input.hasNextLine()) {
             // Write your code here to solve the problem
-            System.out.println( input.nextLine() );
+            System.out.println(input.nextLine());
         }
-
 	}
-
-    
-
 }
 
 

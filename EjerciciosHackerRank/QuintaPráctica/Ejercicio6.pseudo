@@ -144,72 +144,24 @@ while(!haTerminadoElCamino) {
   casilla = mapaOculto[fila][columna];
 }
 
-//Revisar si hay explosivos
-for (int i = 0; i < mapaRevelado.length; i++) {
-  for (int j = 0; j < mapaRevelado[0].length; j++) {
-    if((mapaRevelado[i][j] == 'X') || (mapaRevelado[i][j] == '~')){
-      //No haga nada
-    } else if(mapaOculto[i][j] == mapaOculto[mapaOculto[i][j]/10][mapaOculto[i][j]%10]) {
-        mapaRevelado[i][j] = '!';
-    }
-  }
-}
 
-int fila = filaInicial-1;
-int columna = columnaInicial-1;
-//recorre camino
-//System.out.println(mapaOculto[fila][columna]);
-int casillaCamino = mapaOculto[fila][columna];
-for(int i = 1; i <= 9; i++) {
-  System.out.print(casillaCamino+" ");
-  fila = (casillaCamino/10)-1;
-  columna = (casillaCamino%10)-1;
-  casillaCamino = mapaOculto[fila][columna];
-}
 
-System.out.println(casillaCamino+" ");
 
-int fila = filaInicial-1;
-int columna = columnaInicial-1;
-boolean cicloTerminado = false;
-int casillaCamino = mapaOculto[fila][columna];
-int producto = casillaCamino;
-while(cicloTerminado) {
+public boolean hayLoop(int[][] mapaOculto, int filaInicial, int columnaInicial, int valor, int contador) {
 
-  int primerDigito = casillaCamino/10;
-  int segundoDigito = casillaCamino%10;
-
-  if(primerDigito<0) {
-    //sea
-    cicloTerminado = true;
-  } else if(primerDigito>mapaOculto.lenght||segundoDigito>mapaOculto[0].lenght) {
-    //error
-    cicloTerminad0 = true;
-  } else {
-    int casillaSiguiente = mapaOculto[primerDigito][segundoDigito];
-    
-    if(casillaSiguiente == casillaCamino) {
-      //treasure
-      cicloTerminado = true;
-    } else if(producto%casillaSiguiente==0) {
-      //Hay loop
-      cicloTerminado = true;
-    } else {
-      producto *= casillaSiguiente; 
-      casillaCamino = casillaSiguiente;
-    }
-  }
-
-  //imprime el camino oculto en números
-  int casillaCamino = mapaOculto[fila][columna];
-  int producto = casillaCamino;
-  for(int i = 1; i <= 9; i++) {
-    System.out.print(casillaCamino+" ");
-    fila = (casillaCamino/10)-1;
-    columna = (casillaCamino%10)-1;
-    casillaCamino = mapaOculto[fila][columna];
-  }
+  boolean hayLoop = false;
   
-  System.out.println(casillaCamino+" ");
+  int[] camino = new int[contador];
+  filaTurno = filaInicial-1;
+  columnaTurno = columnaInicial-1;
+  for (int i = 0; i < contador; i++) {
+    int casillaTurno = mapaOculto[filaTurno][columnaTurno];
+    camino = 
+  }
+
+
 
 }
+
+
+
