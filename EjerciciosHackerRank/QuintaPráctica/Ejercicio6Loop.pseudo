@@ -1,0 +1,61 @@
+//Revela el camino
+int fila = filaInicial-1;
+int columna = columnaInicial-1;
+int casilla = mapaOculto[fila][columna];
+
+int contador = 0;
+boolean haTerminadoElCamino = false;
+
+while (!haTerminadoElCamino) {
+  int primerDigito = casilla/10;
+  int segundoDigito = casilla%10;
+  contador++;
+  
+  /**
+    Hay que encontrar la manera de hacer que el loop no joda tanto.
+  */
+  if (casilla < 0) {
+    System.out.println("sea"); //El camino lleva al mar
+  } else if((primerDigito < 1)||(primerDigito>mapaOculto.length)||(segundoDigito < 1)||(segundoDigito > mapaOculto[0].length)) {
+      System.out.println("error"); //El camino se sale del mapa
+  } else if(hayLoop(mapaOculto, filaInicial, columnaInicial, valor, contador)) {
+      mapaRevelado[fila][columna] = '.';
+      System.out.println("loop"); //el camino tiene un ciclo
+    break;
+  } else if(casilla == mapaOculto[primerDigito][segundoDigito]) {
+      System.out.println("treasure");
+      mapaRevelado[fila][columna] = 'X';
+      haTerminadoElCamino = true;
+  } else {
+      mapaRevelado[fila][columna] = '.';
+      contador++;
+  }
+
+  fila = primerDigito;
+  columna = segundoDigito;
+  casilla = mapaOculto[fila][columna];
+}
+
+public boolean hayLoop(int[][] mapaOculto, int filaInicial, int columnaInicial, int valor, int contador) {
+
+  boolean hayLoop = false;
+  //lea el camino de tal forma que quepan las últimas casillas
+  int[] camino = new int[contador];
+  int filaTurno = filaInicial;
+  int columnaTurno = columnaInicial;
+  for (int i = 0; i < contador; i++) {
+    int casillaTurno = mapaOculto[filaTurno-1][columnaTurno-1]; //se aplica
+    camino[i] = casillaTurno;
+    filaTurno = casillaTurno/10;
+    columnaTurno = casillaTurno%10;
+  }
+
+  //Verifique que las ultimas casillas no coinciden con el valor proporcionado
+  for (int i = 0; i < contador; i++) {
+    if (camino[i] == valor) {
+      boolean hayLoop = true;
+    }
+  }
+
+  return hayLoop;
+}
