@@ -1,0 +1,67 @@
+crear field callCount := 0;
+
+procedure run() do
+
+  while (haySiguienteLinea()) do
+
+    crear a := leerInt();
+    crear b := leerInt();
+
+    crear num1;
+    crear num2;
+
+    if a < 0 && b > 0 do
+      num1 = (-1) * a;
+      num2 = b;
+    else if a > 0 && b < 0 do
+      num1 = a;
+      num2 = (-1) * b;
+    else if a < 0 && b < 0 do
+      num1 = (-1) * a;
+      num2 = (-1) * b;
+    else
+      num1 = a;
+      num2 = b;
+    end if
+
+    crear long mcd = calcularMCD(num1, num2);
+    print "%d %d: %d (%d)", num1, num2, mcd , callCount;
+  end while
+
+end procedure
+
+procedure long calcularMCD(int num1, int num2) do
+  callCount++;
+  crear mcd := 0;
+
+  if num1 > 0 && num2 > 0 do
+
+    crear min := (num1 <= num2)?(num1):(num2);
+    crear div := 1;
+
+    while div <= min do
+
+      if (num1 % div == 0) && (num2 % div == 0) do
+
+        calcularMCD(num1 / div, num2 / div);
+        break;
+
+      end if
+
+      div++;
+
+    end while
+
+    if div == 1 do
+
+      return 1;
+
+    end if
+
+  else do
+
+    mcd = num1 + num2;
+
+  end if
+
+end procedure
