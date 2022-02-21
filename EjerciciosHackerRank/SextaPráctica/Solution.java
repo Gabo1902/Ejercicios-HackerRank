@@ -37,8 +37,6 @@ public class Solution
 
     while (this.input.hasNextLong()) {
 
-      //this.input.useDelimiter("[\\s]+");
-
       long num1 = this.input.nextLong();
       long num2 = this.input.nextLong();
 
