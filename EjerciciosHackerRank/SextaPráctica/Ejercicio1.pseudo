@@ -18,7 +18,7 @@ procedure run() do
       num2 = (-1) * b;
     else if a < 0 && b < 0 do
       num1 = (-1) * a;
-      num2 = (-1) * b;
+      numa2 = (-1) * b;
     else
       num1 = a;
       num2 = b;
@@ -32,36 +32,13 @@ end procedure
 
 procedure long calcularMCD(int num1, int num2) do
   callCount++;
-  crear mcd := 0;
 
-  if num1 > 0 && num2 > 0 do
-
-    crear min := (num1 <= num2)?(num1):(num2);
-    crear div := 1;
-
-    while div <= min do
-
-      if (num1 % div == 0) && (num2 % div == 0) do
-
-        calcularMCD(num1 / div, num2 / div);
-        break;
-
-      end if
-
-      div++;
-
-    end while
-
-    if div == 1 do
-
-      return 1;
-
-    end if
-
+  if num1 == 0 || num2 == 0 do
+    return num1 + num2;
+  else if num1 >= num2 do
+    return calcularMCD(num1 - num2, num2);
   else do
-
-    mcd = num1 + num2;
-
+    return calcularMCD(num2 - num1, num1);
   end if
 
 end procedure
