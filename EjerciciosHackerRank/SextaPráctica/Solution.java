@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 /**
  * Calculates the greatest common divisor of two integers recursively
@@ -45,7 +46,13 @@ public class Solution
       long b = valorAbsoluto(num2);
       
       long mcd = calcularMCD(a, b);
-      System.out.printf("%d %d: %d (%d)%n", num1, num2, mcd , callCount);
+
+      DecimalFormat formato = new DecimalFormat("###,###.##");
+
+      String formattedNum1 = formato.format(num1);
+      String formattedNum2 = formato.format(num2);
+
+      System.out.printf("%s %s: %d (%d)%n", formattedNum1, formattedNum2, mcd , callCount);
       callCount = 0;
     }
 
