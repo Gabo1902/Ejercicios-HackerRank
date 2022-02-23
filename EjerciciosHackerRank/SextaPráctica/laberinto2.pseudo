@@ -1,0 +1,165 @@
+/*
+  Pseudocódigo del ejercicio del laberinto encantado.
+
+  Autor: El asistente Fabián Orozco y los que asistieron a la clase
+*/
+class Solution
+
+  /*
+    Atributos de la clase
+  */
+
+  Scanner reader = null
+  Laberinto laberinto = null
+
+  /*
+    Métodos de la clase
+  */
+
+  //Método main
+  procedure main:
+    Solution solution as a new object
+    solution.run()
+  end procedure
+
+  //Método run
+  procedure run do
+    this.laberinto = new Laberinto()
+    this.reader = new Scanner(System.in)
+
+    laberinto.leer(this.reader)
+
+    if laberinto.encontrarCamino() do
+      laberinto.imprimir()
+    else do
+      print("No solution path")
+    end if
+
+  end procedure
+
+end class
+
+class Laberinto
+
+  /*
+    Atributos de la clase
+  */
+
+  char[][] laberinto
+
+  // A
+  int filaInicial
+  int columnaInicial
+
+  /*
+    Métodos de la clase
+  */
+
+  procedure leer(Scanner reader) do
+    int filas = reader.nextInt()
+    int columnas = reader.nextInt()
+
+    laberinto = new char[filas][columnas]
+
+    reader.nextLine()
+    reader.nextLine()
+
+    reader.useDelimiter("")
+
+    for fila = 0 to laberinto.length do
+      for columna = 0 to laberinto[fila].length do
+        laberinto[fila][columna] = reader.next().charAt(0)
+        if laberinto[fila][columna] == 'A' do
+          this.filaInicial = fila
+          this.columnaInicial = columna
+        end if
+      end for
+        reader.nextLine()
+    end for
+
+  end procedure
+
+  
+  procedure imprimir() do
+
+    for fila = 0 to laberinto.length do
+      for columna = 0 to laberinto[fila].length do
+        print laberinto[fila][columna] //Imprimir valor
+      end for
+        printline //Salto de línea
+    end for
+
+  end procedure
+
+  procedure boolean encontrarCamino() do
+    return avanzar(this.filaInicial, this.columnaInicial)
+  end procedure
+
+
+  //Método recursivo que verifica las celdas adyacentes
+  //Primero coloca el '.'
+  procedure boolean avanzar(fila, columna) do
+
+    //Si hay una casilla vacía, coloque unas migaja de pan
+    if laberinto[fila][columna] == ' ' do
+      laberinto[fila][columna] = '.'
+    end if
+
+    //Norte
+    if verifiqueCasilla(fila - 1, columna) do
+      return true
+    end if
+
+    //Este
+    if verifiqueCasilla(fila, columna + 1) do
+      return true
+    end if
+
+    //Sur
+    if verifiqueCasilla(fila + 1, columna) do
+      return true
+    end if
+
+    //Oeste
+    if verifiqueCasilla(fila, columna - 1) do
+      return true
+    end if
+
+    //Default
+    this.laberinto[fila][columna] = ' '
+    return false
+
+  end procedure
+
+  //Verifica la casilla para saber si está en 'B', si se avanza o si para
+  procedure verifiqueCasilla(fila, columna) do
+
+    switch darValor(fila, columna) do
+      case 'B': return true
+      case '-': return false
+      case '|': return false
+      case '.': return false
+      case 'A': return false
+      case ' ': return avanzar(fila, columna)
+      default: return false
+    end switch
+
+  end procedure
+
+  //Para saber si esta dentro o fuera de la matriz
+  procedure darValor(fila, columna) do
+
+    //Si el valor esta dentro de la matriz
+    if fila >= 0 && fila < laberinto.length do 
+      if columna >= 0 && columna < laberinto[fila].length do
+        //Retorne dicho valor
+        return this.laberinto[fila][columna]
+      end if
+    end if
+
+    //Default (si se encuentra fuera de la matriz)
+    return '-'
+
+  end procedure
+
+end class
