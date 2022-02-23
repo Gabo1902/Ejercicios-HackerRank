@@ -100,7 +100,7 @@ class Laberinto
   //Primero coloca el '.'
   procedure boolean avanzar(fila, columna) do
 
-    //Si hay una casilla vacía, coloque unas migaja de pan
+    //Si hay una casilla vacía, coloque una migaja de pan
     if laberinto[fila][columna] == ' ' do
       laberinto[fila][columna] = '.'
     end if
