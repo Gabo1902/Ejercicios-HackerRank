@@ -44,6 +44,10 @@ class Ejercicio2 {
 
 }
 
+/**
+ * Clase donde están los laberintos, sus atributos y sus
+ * métodos.
+ */
 class Laberinto {
 
   /**
@@ -67,7 +71,7 @@ class Laberinto {
     int filas = reader.nextInt();
     int columnas = reader.nextInt();
 
-    laberinto = new char[filas][columnas];
+    this.laberinto = new char[filas][columnas];
     
     reader.nextLine();
     reader.nextLine();
@@ -79,6 +83,7 @@ class Laberinto {
       for (int j = 0; j < laberinto[i].length; j++) {
         laberinto[i][j] = reader.next().charAt(0);
         if (laberinto[i][j] == 'A') {
+          //El this habla únicamente 
           this.filaInicial = i;
           this.columnaInicial = j;
         }
@@ -189,8 +194,8 @@ class Laberinto {
         return this.laberinto[fila][columna];
       }
     }
-      //Default (si se encuentra fuera de la matriz)
-      return '-';
+    //Default (si se encuentra fuera de la matriz)
+    return '-';
   }
 
 }
