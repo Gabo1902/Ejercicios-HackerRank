@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+/**
+ * solution for table of contents v1 problem
+ */
+public class Solution
+{
+	/**
+	 * Gets data from standard input
+	 */
+	private Scanner input = null;
+
+	/**
+	 * Start the execution of the solution
+	 * @param args Command line arguments
+	 */
+	public static void main(String[] args)
+	{
+		Solution solution = new Solution();
+		solution.run();
+	}
+
+	/**
+	 * Run the solution. This method is called from main()
+	 */
+	public void run()
+	{
+		// Create object to read data from standard input
+		this.input = new Scanner(System.in);
+
+		// Create the object to read and format the table of contents
+		final TableOfContents tableOfContents = new TableOfContents();
+		tableOfContents.readAndFormat(this.input);
+
+		// Close the standard input
+		this.input.close();
+	}
+}
+
+
+// Write your classes here
+
+
+
